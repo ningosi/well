@@ -1,5 +1,8 @@
 <%
     ui.decorateWith("kenyaui", "panel", [heading: (config.heading ?: "Edit Patient"), frameOnly: true])
+    ui.includeJavascript("wellness", "jquery-2.1.0.js", 30)
+    ui.includeJavascript("wellness", "select2.min.css", 31)
+    ui.includeCss("wellness", "select2.min.css", 29)
 
     def nameFields = [
             [
@@ -136,6 +139,20 @@
             <% } %>
 
         </fieldset>
+        <fieldset>
+            <legend>Assign Provider</legend>
+            <table width="100%">
+                <tr>
+                    <td>
+                        <select class="provider" name="provider" id="provider">
+                            <% providerList.each{%>
+                            <option value="${it.providerId}">${it.name}</option>
+                            <%}%>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
 
     </div>
     <div class="ke-panel-footer">
@@ -171,4 +188,9 @@
         });
     });
 
+</script>
+<script>
+    jQuery(document).ready(function() {
+        jQuery('.provider2').select2();
+    });
 </script>

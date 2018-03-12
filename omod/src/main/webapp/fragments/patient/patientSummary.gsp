@@ -42,6 +42,10 @@
 					<td>Delivery Address </td>
 					<td>${home}</td>
 				</tr>
+                <tr>
+                    <td>Assigned To</td>
+                    <td>${provider}</td>
+                </tr>
 			</table>
 	</div>
 </div>

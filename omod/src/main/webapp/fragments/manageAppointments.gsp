@@ -27,7 +27,7 @@ table.toggle tr:nth-child(odd) {
                 <tr>
                     <td colspan="2">
                         <span class="ke-field-content">
-                            <label class="ke-field-label">Provider</label>
+                            <label class="ke-field-label">Partner</label>
                             <select name="provider" id="provider" ng-model="provider" ng-change="refresh()">
                                 <% providerList.each{%>
                                     <option value="${it.providerId}">${it.name}</option>

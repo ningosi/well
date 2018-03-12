@@ -29,7 +29,7 @@
 
 	<bean id="wellness.app.clinician" factory-bean="kenyacore.appFactoryBean" factory-method="createInstance">
 		<constructor-arg value="wellness.medicalEncounter" />
-		<constructor-arg value="Consultant" />
+		<constructor-arg value="Partner" />
 		<constructor-arg value="wellness/clinician/clinicianHome.page" />
 		<constructor-arg value="kenyaui:apps/clinician.png" />
 		<constructor-arg value="300" />
@@ -42,6 +42,7 @@
 		<constructor-arg value="wellness:apps/datamgr.png" />
 		<constructor-arg value="350" />
 	</bean>
+    <!--
 	<bean id="wellness.app.orders" factory-bean="kenyacore.appFactoryBean" factory-method="createInstance">
 		<constructor-arg value="wellness.orders" />
 		<constructor-arg value="Orders" />
@@ -49,7 +50,8 @@
 		<constructor-arg value="wellness:apps/orders.jpg" />
 		<constructor-arg value="360" />
 	</bean>
-
+    -->
+    <!--
 	<bean id="wellness.app.chart" factory-bean="kenyacore.appFactoryBean" factory-method="createInstance">
 		<constructor-arg value="wellness.medicalChart" />
 		<constructor-arg value="Summaries" />
@@ -57,6 +59,7 @@
 		<constructor-arg value="kenyaui:apps/chart.png" />
 		<constructor-arg value="400" />
 	</bean>
+	-->
 
 	<bean id="wellness.app.reports" factory-bean="kenyacore.appFactoryBean" factory-method="createInstance">
 		<constructor-arg value="wellness.reports" />

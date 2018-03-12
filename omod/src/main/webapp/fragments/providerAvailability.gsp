@@ -144,7 +144,7 @@ table.toggle tr:nth-child(odd) {
 
 </style>
 <div class="ke-panel-frame">
-    <div class="ke-panel-heading">Provider scheduling</div>
+    <div class="ke-panel-heading">Partner scheduling</div>
     <div class="ke-page-content">
         <form method="post" name="appointmentBlockCalendarForm">
             <fieldset id="propertiesFieldset" style="clear: both">

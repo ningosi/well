@@ -16,14 +16,14 @@ table.appointments tr:nth-child(odd) {
 }
 </style>
 <div class="ke-panel-frame">
-    <div class="ke-panel-heading">Schedule provider</div>
+    <div class="ke-panel-heading">Schedule Partner</div>
     <div class="ke-page-content">
         <form  id="schedule-provider" method="post" action="${ui.actionLink("wellness", "scheduleProvider", "post")}">
             <div>
                 <table>
                     <tr>
                         <td>
-                            <label class="ke-field-label">Provider:</label>
+                            <label class="ke-field-label">Partner:</label>
                         <span class="ke-field-content">
                             <select name="chosenProviderId" id="chosenProviderId">
                                 <% providerList.each{%>
@@ -129,12 +129,12 @@ table.appointments tr:nth-child(odd) {
 </div>
 <br />
 <div class="ke-panel-frame">
-    <div class="ke-panel-heading">Provider Availability</div>
+    <div class="ke-panel-heading">Partner Availability</div>
     <% if(providerSchedule) {%>
         <div class="ke-page-content">
             <table class="appointments" width="100%">
                 <tr>
-                    <th>Provider</th>
+                    <th>Partner</th>
                     <th>Start date</th>
                     <th>End date</th>
                     <th>Appointment type</th>

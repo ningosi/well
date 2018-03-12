@@ -74,6 +74,7 @@ public class CommonMetadata extends AbstractMetadataBundle {
 		public static final String PATIENT_IMAGE = "8ebdc3ac-a1ea-11e7-8dbf-d3167fc0cc32";
 		public static final String FEED_BACK_IMAGE = "fe57cc84-d8b9-11e7-8eb6-ef27cfad58a1";
 		public static final String BEFORE_PHOTO = "6cc374ee-d986-11e7-ac53-179a8fd4b0c5";
+		public static final String PROVIDER = "8094f600-237d-11e8-8878-e35918b67567";
 	}
 
 	public static final class _Provider {
@@ -151,6 +152,7 @@ public class CommonMetadata extends AbstractMetadataBundle {
 		install(personAttributeType("Passport photo", "The passport of the client", String.class, null, false, 4.4, _PersonAttributeType.PATIENT_IMAGE));
 		install(personAttributeType("Feedback photo", "The feedback photo of the client", String.class, null, false, 4.5, _PersonAttributeType.FEED_BACK_IMAGE));
 		install(personAttributeType("Before photo", "The before photo of the client", String.class, null, false, 4.5, _PersonAttributeType.BEFORE_PHOTO));
+        install(personAttributeType("Provider","Provider assigned to client",String.class,null,false,4.6,_PersonAttributeType.PROVIDER));
 
 		install(relationshipType("Guardian", "Dependant", "One that guards, watches over, or protects", _RelationshipType.GUARDIAN_DEPENDANT));
 		install(relationshipType("Partner", "Partner", "A spouse is a partner in a marriage, civil union, domestic partnership or common-law marriage a male spouse is a husband and a female spouse is a wife", _RelationshipType.PARTNER));
@@ -158,7 +160,7 @@ public class CommonMetadata extends AbstractMetadataBundle {
 		install(visitAttributeType("Source form", "The form whose submission created the visit",
 				FormDatatype.class, null, 0, 1, _VisitAttributeType.SOURCE_FORM));
 
-		install(visitType("Outpatient", "Visit where the patient is not admitted to the hospital", _VisitType.OUTPATIENT));
+		install(visitType("Client", "Visit where the patient is not admitted to the hospital", _VisitType.OUTPATIENT));
 
 		uninstall(possible(PersonAttributeType.class, "73d34479-2f9e-4de3-a5e6-1f79a17459bb"), "Became patient identifier"); // National ID attribute type
 	}

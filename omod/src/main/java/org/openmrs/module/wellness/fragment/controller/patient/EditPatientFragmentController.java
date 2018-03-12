@@ -19,6 +19,7 @@ import org.apache.commons.lang.StringUtils;
 import org.openmrs.*;
 import org.openmrs.api.ProgramWorkflowService;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.appointmentscheduling.api.AppointmentService;
 import org.openmrs.module.idgen.service.IdentifierSourceService;
 import org.openmrs.module.wellness.Dictionary;
 import org.openmrs.module.wellness.api.KenyaEmrService;
@@ -103,6 +104,9 @@ public class EditPatientFragmentController {
 		causeOfDeathOptions.add(Dictionary.getConcept(Dictionary.UNKNOWN));
 		model.addAttribute("causeOfDeathOptions", causeOfDeathOptions);
 
+		//Get all providers
+        model.addAttribute("providerList", Context.getProviderService().getAllProviders());
+
 	}
 
 	/**
@@ -175,6 +179,7 @@ public class EditPatientFragmentController {
 		private String nextOfKinContact;
 		private String nextOfKinAddress;
 		private String subChiefName;
+		private String provider;
 
 
 		/**
@@ -215,6 +220,7 @@ public class EditPatientFragmentController {
 
 			PersonWrapper wrapper = new PersonWrapper(person);
 			telephoneContact = wrapper.getTelephoneContact();
+			provider = wrapper.getProvider();
 		}
 
 		/**
@@ -298,6 +304,7 @@ public class EditPatientFragmentController {
 			if (StringUtils.isNotBlank(nextOfKinContact)) {
 				validateField(errors, "nextOfKinContact", new TelephoneNumberValidator());
 			}
+			//TODO : Validate provider
 
 			validateField(errors, "personAddress");
 
@@ -389,6 +396,7 @@ public class EditPatientFragmentController {
 			PatientWrapper wrapper = new PatientWrapper(toSave);
 
 			wrapper.getPerson().setTelephoneContact(telephoneContact);
+			wrapper.getPerson().setProvider(provider);
 			wrapper.setNationalIdNumber(nationalIdNumber, location);
 			wrapper.setPatientClinicNumber(patientClinicNumber, location);
 			wrapper.setUniquePatientNumber(uniquePatientNumber, location);
@@ -800,7 +808,22 @@ public class EditPatientFragmentController {
 			this.passportNumber = passportNumber;
 		}
 
-	}
+        /**
+         *
+         * @return provide id
+         */
+        public String getProvider() {
+            return provider;
+        }
+
+        /**
+         *
+         * @param provider
+         */
+        public void setProvider(String provider) {
+            this.provider = provider;
+        }
+    }
 
 
 }
