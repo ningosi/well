@@ -1,9 +1,9 @@
 <%
     ui.decorateWith("wellness", "standardPage", [patient: currentPatient, closeChartUrl: ui.pageLink("wellness", "home")])
+    ui.includeCss("wellness", "card.css", 28)
 %>
 <div class="ke-page-content">
-    <div class="container mt-3">
-        <div class="row">
+    <div class="container">
             <% apps.eachWithIndex { app, i ->
                 def onClick = "ui.navigate('/" + contextPath + "/" + app.url + (currentPatient ? ("?patientId=" + currentPatient.id) : "") + "')"
                 def iconTokens = app.icon.split(":")
@@ -13,13 +13,12 @@
                     icon = "images/" + iconTokens[1]
                 }
             %>
-            <div class="col-4 col-md-3">
-                <div style="float: left; margin: 5px;">
-                    <button type="button" class="ke-app" onclick="${onClick}"><img
-                            src="${ui.resourceLink(iconProvider, icon)}"/>${app.label}</button>
-                </div>
+            <div class="section style_prevu_kit">
+                <button type="button" class="launch" onclick="${onClick}">
+                    <img src="${ui.resourceLink(iconProvider, icon)}"/>
+                    <span>${app.label}</span>
+                </button>
             </div>
             <% } %>
-        </div>
     </div>
 </div>

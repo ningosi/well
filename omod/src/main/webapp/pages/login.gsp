@@ -37,9 +37,11 @@ body {
     top: 0;
 }
 
-.ke-warning {
+.ke-toolbar {
     position: absolute;
-    top: 0;
+    top: 10%;
+    right: 0;
+
 }
 
 .class-header {
@@ -76,6 +78,7 @@ body {
         <input type="password" value="" placeholder="Password" id="pw" name="pw"/>
         <button type="submit">Submit</button>
     </form>
+    <span><a style="font-size: 12px" href="forgotPassword.form">Forgot password?</a></span>
 </div>
 
 <div class="container mt-3">
