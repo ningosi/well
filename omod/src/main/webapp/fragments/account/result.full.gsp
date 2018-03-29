@@ -9,7 +9,7 @@
 		</td>
 		<td style="text-align: center; vertical-align: top; width: 33%">
 			<div ng-if="account.provider">
-				<span class="ke-identifier-type">Provider ID</span> <span class="ke-identifier-value">{{ account.provider.identifier }}</span>
+				<span class="ke-identifier-type">Partner ID</span> <span class="ke-identifier-value">{{ account.provider.identifier }}</span>
 			</div>
 			<div ng-if="account.telephoneContact">
 				<span class="ke-identifier-type">Telephone</span> <span class="ke-identifier-value">{{ account.telephoneContact }}</span>

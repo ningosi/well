@@ -1,3 +1,6 @@
+<%
+    ui.includeCss("wellness", "background.css", 29)
+%>
 <div class="ke-panel-frame">
     <div class="ke-panel-heading">Client's passport photo</div>
     <div class="ke-panel-content">

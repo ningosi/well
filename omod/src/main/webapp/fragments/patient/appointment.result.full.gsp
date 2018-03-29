@@ -25,7 +25,7 @@
                         <td><b>{{patient.type}}</b></td>
                     </tr>
                     <tr>
-                        <td>Appointment provider:</td>
+                        <td>Appointment partner:</td>
                         <td><b>{{patient.provider}}</b></td>
                     </tr>
                     <tr>

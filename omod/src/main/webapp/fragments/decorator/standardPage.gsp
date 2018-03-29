@@ -3,6 +3,7 @@
     ui.includeCss("wellness", "kenyaemr.css", 50)
     ui.includeCss("wellness", "bootstrap.css", 31)
     ui.includeCss("wellness", "bootstrap.min.css", 30)
+    ui.includeCss("wellness", "background.css", 29)
 
 	if (config.patient) {
 		config.context = "patientId=${ config.patient.id }"
@@ -37,7 +38,7 @@
 
 <% if (config.layout == "sidebar") { %>
 html {
-	background: #FFF url('${ ui.resourceLink("kenyaui", "images/background.png") }') repeat-y;
+	//background: #FFF url('${ ui.resourceLink("kenyaui", "images/background.png") }') repeat-y;
 }
 <% } %>
 

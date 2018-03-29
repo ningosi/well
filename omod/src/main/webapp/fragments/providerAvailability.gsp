@@ -35,7 +35,7 @@ table.toggle tr:nth-child(odd) {
                 }
 
                 if(startDate.getTime() < currentDateTime.getTime()){ //Can't save blocks in the past
-                    var dialogContent = "Providers cannot be scheduled in the past, please try a different day.";
+                    var dialogContent = "Partners cannot be scheduled in the past, please try a different day.";
                     document.getElementById("notifyDialogText").innerHTML = dialogContent;
                     jQuery('#notifyDialog').dialog('open');
                     event.stopPropagation();
@@ -181,11 +181,11 @@ table.toggle tr:nth-child(odd) {
         </div>
         <div id="tableBlocks" style="display: none">
             <div class="ke-panel-frame">
-                <div class="ke-panel-heading">Provider Availability</div>
+                <div class="ke-panel-heading">Partner Availability</div>
                 <div class="ke-page-content">
                     <table class="toggle" width="100%">
                         <tr>
-                            <th>Provider</th>
+                            <th>Partner</th>
                             <th>Start date</th>
                             <th>End date</th>
                             <th>Appointment type</th>

@@ -123,5 +123,21 @@
 
 
 	</changeSet>
+    <changeSet id="wellness.change.provider" author="pekirapa">
+        <preConditions onFail="MARK_RAN" onError="WARN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*) FROM person_name WHERE person_id = 2 ;
+            </sqlCheck>
+        </preConditions>
+        <comment>
+            Change Unknown Provider to Unknown Parner
+        </comment>
+        <sql>
+            SET FOREIGN_KEY_CHECKS=0;
+            UPDATE person_name SET family_name='Partner' WHERE person_id=2;
+            SET FOREIGN_KEY_CHECKS=1;
+        </sql>
+    </changeSet>
+
 
 </databaseChangeLog>

@@ -14,10 +14,13 @@
 
 package org.openmrs.module.wellness.page.controller;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.openmrs.Provider;
+import org.openmrs.User;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.appframework.domain.AppDescriptor;
 import org.openmrs.module.appframework.service.AppFrameworkService;
@@ -54,8 +57,27 @@ public class HomePageController {
 				return OpenmrsUtil.compareWithNullAsGreatest(left.getOrder(), right.getOrder());
 			}
 		});
+        User user = Context.getAuthenticatedUser();
+        Collection<Provider> providers = Context.getProviderService().getProvidersByPerson(user.getPerson());
+        String role = "";
+//        if(user.isSuperUser()){
+//            role = "Super User";
+//        }else if(!providers.isEmpty()){
+//            role="provider";
+//            for (Provider provider: providers){
+//                role  = role + "" + provider.getId();
+//            }
+//        }
+        if(user.hasRole("Support")){
+            role = "support";
+        }else{
+            role = "not support";
+        }
+		String user_name = Context.getAuthenticatedUser().getGivenName();
 
 		model.addAttribute("apps", apps);
+		model.addAttribute("user",user_name);
+		model.addAttribute("role",role);
 		
 		return null;
 	}

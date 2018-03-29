@@ -10,7 +10,7 @@
 %>
 <style type="text/css">
 body {
-    background-color: #e0d8cd;
+    //background-color: #e0d8cd;
     height: 100%;
 }
 
@@ -19,7 +19,7 @@ body {
     top: 100px;
     bottom: 0;
     width: 100%;
-    background: #FFF url('${ ui.resourceLink("wellness", "images/logos/well_background.png") }') ;
+    //background: #FFF url('${ ui.resourceLink("wellness", "images/logos/well_background.png") }') ;
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: cover;

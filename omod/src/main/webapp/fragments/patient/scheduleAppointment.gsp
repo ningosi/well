@@ -53,7 +53,7 @@ table.schedules tr:nth-child(odd) {
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Provider:</td>
+                                            <td>Partner:</td>
                                             <td>
                                                 <select name="provider" id="provider">
                                                     <% provider.each{%>
@@ -163,7 +163,7 @@ table.schedules tr:nth-child(odd) {
                                 <div style="display: none" id="showBlocks">
                                     <table class="schedules" width="100%">
                                         <tr>
-                                            <th>Provider</th>
+                                            <th>Partner</th>
                                             <th>Appointment type</th>
                                             <th>Date</th>
                                             <th>Available time</th>
@@ -193,7 +193,7 @@ table.schedules tr:nth-child(odd) {
 
             <table class="schedules" align="center" width="80%">
                     <tr>
-                        <th>Provider</th>
+                        <th>Partner</th>
                         <th>Appointment type</th>
                         <th>Appointment date</th>
                         <th>Time</th>

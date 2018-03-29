@@ -31,6 +31,7 @@ import org.openmrs.api.LocationService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.kenyacore.CoreConstants;
 import org.openmrs.module.wellness.api.KenyaEmrService;
+import org.openmrs.module.wellness.wrapper.PatientWrapper;
 import org.openmrs.ui.framework.SimpleObject;
 import org.openmrs.ui.framework.UiUtils;
 import org.openmrs.util.OpenmrsConstants;
@@ -95,36 +96,56 @@ public class SearchFragmentController {
 		Map<Patient, Visit> patientActiveVisits = getActiveVisitsByPatients();
 
 		List<Patient> matched = new ArrayList<Patient>();
+        User currentUser = Context.getAuthenticatedUser();
+        Collection<Provider> providers = Context.getProviderService().getProvidersByPerson(currentUser.getPerson());
 
 		// If query wasn't long enough to be searched on, and they've requested checked-in patients, return the list
 		// of checked in patients
-		if (StringUtils.isBlank(query) && "checked-in".equals(which)) {
-			matched.addAll(patientActiveVisits.keySet());
-			Collections.sort(matched, new PersonByNameComparator()); // Sort by person name
-		}
-		else {
-			if ("all".equals(which)) {
-				matched = matchedByNameOrID;
-			}
-			else if ("checked-in".equals(which)) {
-				for (Patient patient : matchedByNameOrID) {
-					if (patientActiveVisits.containsKey(patient)) {
-						matched.add(patient);
-					}
-				}
-			}
-			else if ("non-accounts".equals(which)) {
-				Set<Person> accounts = new HashSet<Person>();
-				accounts.addAll(getUsersByPersons(query).keySet());
-				accounts.addAll(getProvidersByPersons(query).keySet());
+        if(!providers.isEmpty() || currentUser.hasRole("Support")) {
+            if (StringUtils.isBlank(query) && "checked-in".equals(which)) {
+                matched.addAll(patientActiveVisits.keySet());
+                Collections.sort(matched, new PersonByNameComparator()); // Sort by person name
 
-				for (Patient patient : matchedByNameOrID) {
-					if (!accounts.contains(patient)) {
-						matched.add(patient);
-					}
-				}
-			}
-		}
+            } else {
+                if ("all".equals(which)) {
+                    matched = matchedByNameOrID;
+                } else if ("checked-in".equals(which)) {
+                    for (Patient patient : matchedByNameOrID) {
+                        if (patientActiveVisits.containsKey(patient)) {
+                            matched.add(patient);
+                        }
+                    }
+                } else if ("non-accounts".equals(which)) {
+                    Set<Person> accounts = new HashSet<Person>();
+                    accounts.addAll(getUsersByPersons(query).keySet());
+                    accounts.addAll(getProvidersByPersons(query).keySet());
+
+                    for (Patient patient : matchedByNameOrID) {
+                        if (!accounts.contains(patient)) {
+                            matched.add(patient);
+                        }
+                    }
+                }
+
+            }
+        }
+
+        //Check for patients assigned to current logged in provider
+        Set<Patient> provider_patients = new HashSet<Patient>();
+        if (!currentUser.hasRole("Support")){
+            for(Provider provider : providers) {
+                for (Patient patient : matched) {
+                    PatientWrapper patientWrapper = new PatientWrapper(patient);
+                    if (patientWrapper.getPerson() != null && patientWrapper.getPerson().getProvider()!=null) {
+                        if (patientWrapper.getPerson().getProvider().equals(String.valueOf(provider.getId()))) {
+                            provider_patients.add(patient);
+                        }
+                    }
+                }
+            }
+            //retain only patients assigned to logged in provider
+            matched.retainAll(provider_patients);
+        }
 
 		// Simplify and attach active visits to patient objects
 		List<SimpleObject> simplePatients = new ArrayList<SimpleObject>();

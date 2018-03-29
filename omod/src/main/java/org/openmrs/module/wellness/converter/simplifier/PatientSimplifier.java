@@ -21,6 +21,8 @@ import org.openmrs.module.appointmentscheduling.Appointment;
 import org.openmrs.module.appointmentscheduling.api.AppointmentService;
 import org.openmrs.module.kenyacore.identifier.IdentifierManager;
 import org.openmrs.module.kenyaui.simplifier.AbstractSimplifier;
+import org.openmrs.module.wellness.wrapper.PatientWrapper;
+import org.openmrs.module.wellness.wrapper.PersonWrapper;
 import org.openmrs.ui.framework.SimpleObject;
 import org.openmrs.ui.framework.UiUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +59,10 @@ public class PatientSimplifier extends AbstractSimplifier<Patient> {
 		for (PatientIdentifier identifier : identifierManager.getPatientDisplayIdentifiers(patient)) {
 			simpleIdentifiers.add(ui.simplifyObject(identifier));
 		}
-
-		//List<Appointment> patientAppointments = Context.getService(AppointmentService.class).getAppointmentsOfPatient(patient);
+        String provider = "";
+        provider = new PatientWrapper(patient).getPerson().getProvider();
+        ret.put("provider",provider);
+        //List<Appointment> patientAppointments = Context.getService(AppointmentService.class).getAppointmentsOfPatient(patient);
 		ret.put("identifiers", simpleIdentifiers);
 		//ret.put("appointment", ui.simplifyObject(patientAppointments.get(patientAppointments.size() -1)));
 		return ret;
