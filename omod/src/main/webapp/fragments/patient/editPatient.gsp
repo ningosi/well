@@ -203,39 +203,39 @@
     </fieldset>
     <fieldset>
         <legend> Medical History</legend>
-        <table width="100%">
+        <table width="80%">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <input type="checkbox" name="hbp" id="hbp" value="${high_pressure }" ${command.hbp ? 'checked="checked"' : ''}>High Blood Pressure
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <input type="checkbox" name="heartCondition" id="heartCondition" value="${heart_condition }" ${command.heartCondition ? 'checked="checked"' : ''}>Heart Condition
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <input type="checkbox" name="kidney" id="kidney" value="${kidney }" ${command.kidney ? 'checked="checked"' : ''}>Kidney
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <input type="checkbox" name="hbp" id="hysterectomy" value="${hysterectomy }" ${command.hysterectomy ? 'checked="checked"' : ''}>Hysterectomy
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                         <input type="checkbox" name="highColesteral" id="highColesteral" value="${highCholesteral }" ${command.highColesteral ? 'checked="checked"' : ''}>High Cholesteral
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <input type="checkbox" name="depression" id="depression" value="${depression }" ${command.depression ? 'checked="checked"' : ''}>Depression
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <input type="checkbox" name="hypothyrodism" id="hypothyrodism" value="${hypothrodism }" ${command.hypothyrodism ? 'checked="checked"' : ''}>Hypothyrodism
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <input type="checkbox" name="liver" id="liver" value="${liver }" ${command.liver ? 'checked="checked"' : ''}>Liver
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <input type="checkbox" name="gallBladder" id="gallBladder" value="${gallBladder }" ${command.gallBladder ? 'checked="checked"' : ''}>Gall Bladder
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <input type="checkbox" name="diabetes" id="diabetes" value="${diabetes }" ${command.diabetes ? 'checked="checked"' : ''}>Diabetes
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <input type="checkbox" name="hyperthyrodism" id="hyperthyrodism" value="${hyperthyrodism }" ${command.hyperthyrodism ? 'checked="checked"' : ''}>Hyperthyrodism
                 </div>
             </div>

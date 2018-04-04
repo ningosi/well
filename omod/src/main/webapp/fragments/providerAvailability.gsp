@@ -47,7 +47,6 @@ table.toggle tr:nth-child(odd) {
                     this.fullCalendar('unselect');
                 }
             },
-            editable: false,
             theme: true,
             eventClick: function(calEvent, jsEvent, view) {
                 var selectedAppointmentBlockId = calEvent.id;
@@ -63,7 +62,9 @@ table.toggle tr:nth-child(odd) {
             },
             viewDisplay: function(view) {
                 updateAppointmentBlockCalendar(view.visStart,view.visEnd);
-            }
+            },
+            events: ${ events },
+            editable: false
         });
     }
 
@@ -194,7 +195,7 @@ table.toggle tr:nth-child(odd) {
                         <% providerSchedule.each{%>
                         <tr>
                             <td><a href="editAppointmentBlock.page?blockId=${it.appointmentBlockId}">${it.provider.name}</a></td>
-                            <td>${it.startDate}</td>
+                            <td>${it.starptDate}</td>
                             <td>${it.endDate}</td>
                             <% it.types.each{%>
                             <td>${it.name}</td>

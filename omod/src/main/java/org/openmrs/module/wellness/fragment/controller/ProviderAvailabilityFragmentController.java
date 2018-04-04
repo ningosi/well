@@ -1,6 +1,14 @@
 package org.openmrs.module.wellness.fragment.controller;
 
+import com.google.gson.JsonArray;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.openmrs.Provider;
+import org.openmrs.User;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.appointmentscheduling.Appointment;
 import org.openmrs.module.appointmentscheduling.AppointmentBlock;
 import org.openmrs.module.appointmentscheduling.api.AppointmentService;
 import org.openmrs.module.wellness.EmrConstants;
@@ -12,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ProviderAvailabilityFragmentController {
@@ -88,8 +97,59 @@ public class ProviderAvailabilityFragmentController {
         //Update model variables - what the page shows.
         model.addAttribute("fromDate", fromDateAsLong);
         model.addAttribute("toDate", toDateAsLong);
-    }
 
+        User currentUser = Context.getAuthenticatedUser();
+        Collection<Provider> providers = Context.getProviderService().getProvidersByPerson(currentUser.getPerson());
+        List<Appointment> appointments = new ArrayList<Appointment>();
+        appointments = Context.getService(AppointmentService.class).getAllAppointments();
+
+        if(!providers.isEmpty() && !currentUser.hasRole("Support")){
+            Set<Appointment> provider_appointments = new HashSet<Appointment>();
+                for(Provider provider : providers) {
+                    for (Appointment appointment : appointments) {
+                        if(appointment.getProvider().equals(provider)){
+                            provider_appointments.add(appointment);
+                        }
+                    }
+                }
+                appointments.retainAll(provider_appointments);
+
+        }else {
+            appointments = Context.getService(AppointmentService.class).getAllAppointments();
+        }
+        String events = "[\n" +
+                "                {\n" +
+                "                    title: 'All Day Event',\n" +
+                "                    description: 'description for All Day Event',\n" +
+                "                    start: '2018-03-01'\n" +
+                "                },\n" +
+                "                ]";
+
+        events = eventsMapper(appointments);
+        Log log = LogFactory.getLog(ProviderAvailabilityFragmentController.class);
+        log.info(events);
+        model.addAttribute("events", events);
+    }
+    private String eventsMapper(List<Appointment> appointments){
+        JSONArray jsonArray = new JSONArray();
+        for(Appointment appointment : appointments){
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("title",appointment.getPatient().getPerson().getGivenName() + " "  + appointment.getAppointmentType().getDisplayString());
+                jsonObject.put("description","");
+                String start = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(appointment.getStartDateTime());
+                String end = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(appointment.getEndDateTime());
+                jsonObject.put("start", start);
+                jsonObject.put("end", end);
+                jsonArray.add(jsonObject);
+            }catch (Exception e){
+                Log log = LogFactory.getLog(ProviderAvailabilityFragmentController.class);
+                log.error("JSON OBJECT exception" + e.toString());
+            }
+
+        }
+        return jsonArray.toJSONString();
+    }
     public String post(FragmentModel model, UiUtils ui,
                          @RequestParam(value = "action", required = false) String action,
                          @RequestParam(value = "locationId", required = false) Integer locationId,
