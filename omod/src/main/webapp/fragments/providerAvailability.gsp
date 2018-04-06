@@ -48,15 +48,7 @@ table.toggle tr:nth-child(odd) {
                 }
             },
             theme: true,
-            eventClick: function(calEvent, jsEvent, view) {
-                var selectedAppointmentBlockId = calEvent.id;
-                document.getElementById('action').value = "editAppointmentBlock.gsp";
-                document.getElementById('fromDate').value = 0;
-                document.getElementById('toDate').value = 0;
-                document.getElementById('appointmentBlockId').value = selectedAppointmentBlockId;
-                document.forms['appointmentBlockCalendarForm'].submit();
 
-            },
             eventMouseout: function(calEvent, jsEvent, view) {
                 jQuery(this).css('border-color', '');
             },

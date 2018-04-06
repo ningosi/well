@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 
 public class ProviderAvailabilityFragmentController {
 
@@ -102,45 +104,48 @@ public class ProviderAvailabilityFragmentController {
         Collection<Provider> providers = Context.getProviderService().getProvidersByPerson(currentUser.getPerson());
         List<Appointment> appointments = new ArrayList<Appointment>();
         appointments = Context.getService(AppointmentService.class).getAllAppointments();
+        Log log = LogFactory.getLog(ProviderAvailabilityFragmentController.class);
 
         if(!providers.isEmpty() && !currentUser.hasRole("Support")){
             Set<Appointment> provider_appointments = new HashSet<Appointment>();
                 for(Provider provider : providers) {
                     for (Appointment appointment : appointments) {
-                        if(appointment.getProvider().equals(provider)){
+                        if(appointment.getProvider() != null && appointment.getProvider().equals(provider)){
                             provider_appointments.add(appointment);
                         }
                     }
                 }
                 appointments.retainAll(provider_appointments);
+            log.info("Provider or support");
 
         }else {
             appointments = Context.getService(AppointmentService.class).getAllAppointments();
+            log.info("Not provider or support");
         }
-        String events = "[\n" +
-                "                {\n" +
-                "                    title: 'All Day Event',\n" +
-                "                    description: 'description for All Day Event',\n" +
-                "                    start: '2018-03-01'\n" +
-                "                },\n" +
-                "                ]";
 
-        events = eventsMapper(appointments);
-        Log log = LogFactory.getLog(ProviderAvailabilityFragmentController.class);
+        HashMap<String, String> providerColors = new HashMap<String, String>();
+        for(Provider provider : Context.getProviderService().getAllProviders()){
+            String color = generateColor(new Random());
+            providerColors.put(provider.getName(), color);
+
+        }
+
+        String events = eventsMapper(appointments, providerColors);
         log.info(events);
         model.addAttribute("events", events);
     }
-    private String eventsMapper(List<Appointment> appointments){
+    private String eventsMapper(List<Appointment> appointments, HashMap<String, String> providerColors){
         JSONArray jsonArray = new JSONArray();
         for(Appointment appointment : appointments){
             try {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("title",appointment.getPatient().getPerson().getGivenName() + " "  + appointment.getAppointmentType().getDisplayString());
+                jsonObject.put("title",appointment.getProvider().getName() + " -" + appointment.getAppointmentType().getDisplayString());
                 jsonObject.put("description","");
                 String start = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(appointment.getStartDateTime());
                 String end = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(appointment.getEndDateTime());
                 jsonObject.put("start", start);
                 jsonObject.put("end", end);
+                jsonObject.put("color",providerColors.get(appointment.getProvider().getName()));
                 jsonArray.add(jsonObject);
             }catch (Exception e){
                 Log log = LogFactory.getLog(ProviderAvailabilityFragmentController.class);
@@ -150,6 +155,29 @@ public class ProviderAvailabilityFragmentController {
         }
         return jsonArray.toJSONString();
     }
+
+    private Color colorGenerator(){
+        Random random = new Random();
+        final float hue = random.nextFloat();
+        final float saturation = (random.nextInt(2000) + 1000) / 10000f;
+        final float luminance = 0.9f;
+        return Color.getHSBColor(hue, saturation, luminance);
+    }
+
+    private static String generateColor(Random r) {
+        final char [] hex = { '0', '1', '2', '3', '4', '5', '6', '7',
+                '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+        char [] s = new char[7];
+        int     n = r.nextInt(0x1000000);
+
+        s[0] = '#';
+        for (int i=1;i<7;i++) {
+            s[i] = hex[n & 0xf];
+            n >>= 4;
+        }
+        return new String(s);
+    }
+
     public String post(FragmentModel model, UiUtils ui,
                          @RequestParam(value = "action", required = false) String action,
                          @RequestParam(value = "locationId", required = false) Integer locationId,
