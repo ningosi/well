@@ -51,12 +51,31 @@ table.toggle tr:nth-child(odd) {
 
             eventMouseout: function(calEvent, jsEvent, view) {
                 jQuery(this).css('border-color', '');
+                jQuery(this).css('z-index', 8);
+                jQuery('.tooltiptopicevent').remove();
             },
             viewDisplay: function(view) {
                 updateAppointmentBlockCalendar(view.visStart,view.visEnd);
             },
             events: ${ events },
-            editable: false
+            editable: false,
+            eventMouseover: function (data, event, view) {
+                var start = jQuery.fullCalendar.moment(data.start);
+                var end = jQuery.fullCalendar.moment(data.end);
+                var duration = jQuery.fullCalendar.formatRange(start, end, 'h:mm');
+                tooltip = '<div class="tooltiptopicevent" style="width:auto;height:auto;background:#feb811;position:absolute;z-index:10001;padding:10px 10px 10px 10px ;  line-height: 200%;">' + 'Client: ' + ': ' + data.client + '</br>' + 'Type : '  + data.type + '</br>' + 'Time: ' + ': ' + duration + '</div>';
+
+
+                jQuery("body").append(tooltip);
+                jQuery(this).mouseover(function (e) {
+                    jQuery(this).css('z-index', 10000);
+                    jQuery('.tooltiptopicevent').fadeIn('500');
+                    jQuery('.tooltiptopicevent').fadeTo('10', 1.9);
+                }).mousemove(function (e) {
+                    jQuery('.tooltiptopicevent').css('top', e.pageY + 10);
+                    jQuery('.tooltiptopicevent').css('left', e.pageX + 20);
+                });
+            }
         });
     }
 
@@ -118,7 +137,7 @@ table.toggle tr:nth-child(odd) {
         var providerId = ${providerId};
         var appointmentTypeId = ${appointmentTypeId};
     }
-    
+
     function showAddScheduleView() {
         ui.navigate('wellness', 'intake/appointmentBlock');
     }
@@ -137,7 +156,7 @@ table.toggle tr:nth-child(odd) {
 
 </style>
 <div class="ke-panel-frame">
-    <div class="ke-panel-heading">Partner scheduling</div>
+    <div class="ke-panel-heading">Appointment scheduling</div>
     <div class="ke-page-content">
         <form method="post" name="appointmentBlockCalendarForm">
             <fieldset id="propertiesFieldset" style="clear: both">
@@ -187,7 +206,7 @@ table.toggle tr:nth-child(odd) {
                         <% providerSchedule.each{%>
                         <tr>
                             <td><a href="editAppointmentBlock.page?blockId=${it.appointmentBlockId}">${it.provider.name}</a></td>
-                            <td>${it.starptDate}</td>
+                            <td>${it.startDate}</td>
                             <td>${it.endDate}</td>
                             <% it.types.each{%>
                             <td>${it.name}</td>
