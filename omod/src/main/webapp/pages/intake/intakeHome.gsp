@@ -15,7 +15,6 @@
 %>
 
 <div class="ke-page-sidebar">
-	${ ui.includeFragment("wellness", "patient/patientSearchForm", [ defaultWhich: "checked-in" ]) }
 	${ ui.includeFragment("kenyaui", "widget/panelMenu", [ heading: "Tasks", items: menuItems ]) }
 </div>
 

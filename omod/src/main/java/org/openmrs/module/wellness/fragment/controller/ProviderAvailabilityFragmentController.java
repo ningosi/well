@@ -26,6 +26,8 @@ import java.util.*;
 import java.util.List;
 
 public class ProviderAvailabilityFragmentController {
+    private int partnerId = 0;
+    Log log = LogFactory.getLog(ProviderAvailabilityFragmentController.class);
 
     public void controller(FragmentModel model,
                            HttpServletRequest request,
@@ -40,8 +42,8 @@ public class ProviderAvailabilityFragmentController {
         model.addAttribute("appointmentTypeId", appointmentTypeId);
         model.addAttribute("viewSelect", viewSelect);
         List<AppointmentBlock> appointmentBlocks = new ArrayList<AppointmentBlock>();
-        for(AppointmentBlock block: Context.getService(AppointmentService.class).getAllAppointmentBlocks()){
-            if(block.getEndDate().after(new Date())){
+        for (AppointmentBlock block : Context.getService(AppointmentService.class).getAllAppointmentBlocks()) {
+            if (block.getEndDate().after(new Date())) {
                 appointmentBlocks.add(block);
             }
         }
@@ -106,57 +108,69 @@ public class ProviderAvailabilityFragmentController {
         appointments = Context.getService(AppointmentService.class).getAllAppointments();
         Log log = LogFactory.getLog(ProviderAvailabilityFragmentController.class);
 
-        if(!providers.isEmpty() && !currentUser.hasRole("Support")){
+        if (!providers.isEmpty() && !currentUser.hasRole("Support")) {
             Set<Appointment> provider_appointments = new HashSet<Appointment>();
-                for(Provider provider : providers) {
-                    for (Appointment appointment : appointments) {
-                        if(appointment.getProvider() != null && appointment.getProvider().equals(provider)){
-                            provider_appointments.add(appointment);
-                        }
+            for (Provider provider : providers) {
+                for (Appointment appointment : appointments) {
+                    if (appointment.getProvider() != null && appointment.getProvider().equals(provider)) {
+                        provider_appointments.add(appointment);
                     }
                 }
-                appointments.retainAll(provider_appointments);
+            }
+            appointments.retainAll(provider_appointments);
             log.info("Provider or support");
 
-        }else {
+        } else {
             appointments = Context.getService(AppointmentService.class).getAllAppointments();
             log.info("Not provider or support");
         }
 
         HashMap<String, String> providerColors = new HashMap<String, String>();
-        for(Provider provider : Context.getProviderService().getAllProviders()){
+        for (Provider provider : Context.getProviderService().getAllProviders()) {
             String color = generateColor(new Random());
             providerColors.put(provider.getName(), color);
 
         }
 
-        String events = eventsMapper(appointments, providerColors);
+        String events = eventsMapper(appointments, providerColors).toJSONString();
         log.info(events);
         model.addAttribute("events", events);
+
+        List<Provider> providerList = Context.getProviderService().getAllProviders();
+        model.addAttribute("providers", providerList);
     }
-    private String eventsMapper(List<Appointment> appointments, HashMap<String, String> providerColors){
+
+    private JSONArray eventsMapper(List<Appointment> appointments, HashMap<String, String> providerColors) {
         JSONArray jsonArray = new JSONArray();
-        for(Appointment appointment : appointments){
+        for (Appointment appointment : appointments) {
+            if (partnerId > 0 && appointment.getProvider().getId() != partnerId) {
+                Log log = LogFactory.getLog(ProviderAvailabilityFragmentController.class);
+                log.error("Breaking loop");
+                break;
+            }
             try {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("title",appointment.getProvider().getName() + " -" + appointment.getAppointmentType().getDisplayString());
-                jsonObject.put("description","");
+                jsonObject.put("title", appointment.getProvider().getName() + " -" + appointment.getAppointmentType().getDisplayString());
+                jsonObject.put("client", appointment.getPatient().getPerson().getGivenName() + " " + appointment.getPatient().getPerson().getFamilyName());
+                jsonObject.put("type", appointment.getAppointmentType().getDisplayString());
+                jsonObject.put("Partner", appointment.getProvider().getId());
+                jsonObject.put("id", appointment.getId());
                 String start = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(appointment.getStartDateTime());
                 String end = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(appointment.getEndDateTime());
                 jsonObject.put("start", start);
                 jsonObject.put("end", end);
-                jsonObject.put("color",providerColors.get(appointment.getProvider().getName()));
+                jsonObject.put("color", providerColors.get(appointment.getProvider().getName()));
                 jsonArray.add(jsonObject);
-            }catch (Exception e){
-                Log log = LogFactory.getLog(ProviderAvailabilityFragmentController.class);
+            } catch (Exception e) {
                 log.error("JSON OBJECT exception" + e.toString());
+                //e.printStackTrace();
             }
 
         }
-        return jsonArray.toJSONString();
+        return jsonArray;
     }
 
-    private Color colorGenerator(){
+    private Color colorGenerator() {
         Random random = new Random();
         final float hue = random.nextFloat();
         final float saturation = (random.nextInt(2000) + 1000) / 10000f;
@@ -165,13 +179,13 @@ public class ProviderAvailabilityFragmentController {
     }
 
     private static String generateColor(Random r) {
-        final char [] hex = { '0', '1', '2', '3', '4', '5', '6', '7',
-                '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-        char [] s = new char[7];
-        int     n = r.nextInt(0x1000000);
+        final char[] hex = {'0', '1', '2', '3', '4', '5', '6', '7',
+                '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+        char[] s = new char[7];
+        int n = r.nextInt(0x1000000);
 
         s[0] = '#';
-        for (int i=1;i<7;i++) {
+        for (int i = 1; i < 7; i++) {
             s[i] = hex[n & 0xf];
             n >>= 4;
         }
@@ -179,13 +193,13 @@ public class ProviderAvailabilityFragmentController {
     }
 
     public String post(FragmentModel model, UiUtils ui,
-                         @RequestParam(value = "action", required = false) String action,
-                         @RequestParam(value = "locationId", required = false) Integer locationId,
-                         @RequestParam(value = "chosenTypeId", required = false) Integer appointmentTypeId,
-                         @RequestParam(value = "chosenProviderId", required = false) Integer providerId,
-                         @RequestParam(value = "fromDate", required = false) Long fromDate,
-                         @RequestParam(value = "toDate", required = false) Long toDate,
-                         @RequestParam(value = "appointmentBlockId", required = false) Integer appointmentBlockId){
+                       @RequestParam(value = "action", required = false) String action,
+                       @RequestParam(value = "locationId", required = false) Integer locationId,
+                       @RequestParam(value = "chosenTypeId", required = false) Integer appointmentTypeId,
+                       @RequestParam(value = "chosenProviderId", required = false) Integer providerId,
+                       @RequestParam(value = "fromDate", required = false) Long fromDate,
+                       @RequestParam(value = "toDate", required = false) Long toDate,
+                       @RequestParam(value = "appointmentBlockId", required = false) Integer appointmentBlockId) {
 
         //Updating session variables
         Calendar cal = OpenmrsUtil.getDateTimeFormat(Context.getLocale()).getCalendar();
@@ -208,7 +222,7 @@ public class ProviderAvailabilityFragmentController {
                 getRequest += "&toDate=" + Context.getDateFormat().format(toDateAsDate);
             }
             getRequest += "&redirectedFrom=providerAvailability.page";
-            return "redirect:"+ ui.pageLink(EmrConstants.MODULE_ID, "intake/appointmentBlock?"+ getRequest);
+            return "redirect:" + ui.pageLink(EmrConstants.MODULE_ID, "intake/appointmentBlock?" + getRequest);
 
         }
 
@@ -222,8 +236,16 @@ public class ProviderAvailabilityFragmentController {
             return "redirect:appointmentBlockForm.form?appointmentBlockId=" + appointmentBlockId
                     + "&redirectedFrom=appointmentBlockCalendar.list";
         }
-    return null;
+        return null;
     }
 
+    public String filter(FragmentModel model, UiUtils ui,
+                         @RequestParam(value = "partnerSelect", required = false) Integer partnerId) {
 
+        log.info("Post filter clicked" + partnerId);
+        String events = "[]";
+        this.partnerId = partnerId;
+        //model.addAttribute("events", events);
+        return null;
+    }
 }
