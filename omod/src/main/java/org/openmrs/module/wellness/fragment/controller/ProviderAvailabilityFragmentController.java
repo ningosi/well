@@ -162,7 +162,7 @@ public class ProviderAvailabilityFragmentController {
                 jsonObject.put("color", providerColors.get(appointment.getProvider().getName()));
                 jsonArray.add(jsonObject);
             } catch (Exception e) {
-                log.error("JSON OBJECT exception" + e.toString());
+                log.error("JSON Object Exception" + e.toString());
                 //e.printStackTrace();
             }
 

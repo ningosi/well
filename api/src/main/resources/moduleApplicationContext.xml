@@ -15,7 +15,7 @@
 		<constructor-arg value="wellness.registration" />
 		<constructor-arg value="Registration" />
 		<constructor-arg value="wellness/registration/registrationHome.page" />
-		<constructor-arg value="kenyaui:apps/registration.png" />
+		<constructor-arg value="wellness:apps/profile.svg" />
 		<constructor-arg value="100" />
 	</bean>
 
@@ -23,7 +23,7 @@
 		<constructor-arg value="wellness.intake" />
 		<constructor-arg value="Appointments" />
 		<constructor-arg value="wellness/intake/intakeHome.page" />
-		<constructor-arg value="kenyaui:apps/intake.png" />
+		<constructor-arg value="wellness:apps/calendar.svg" />
 		<constructor-arg value="200" />
 	</bean>
 
@@ -31,7 +31,7 @@
 		<constructor-arg value="wellness.medicalEncounter" />
 		<constructor-arg value="Clients" />
 		<constructor-arg value="wellness/clinician/clinicianHome.page" />
-		<constructor-arg value="kenyaui:apps/clinician.png" />
+		<constructor-arg value="wellness:apps/runner.svg" />
 		<constructor-arg value="300" />
 	</bean>
 
@@ -39,7 +39,7 @@
 		<constructor-arg value="wellness.manager" />
 		<constructor-arg value="Manager" />
 		<constructor-arg value="wellness/manager/managerHome.page" />
-		<constructor-arg value="wellness:apps/datamgr.png" />
+		<constructor-arg value="wellness:apps/datamgr.svg" />
 		<constructor-arg value="350" />
 	</bean>
     <!--
@@ -65,7 +65,7 @@
 		<constructor-arg value="wellness.reports" />
 		<constructor-arg value="Reports" />
 		<constructor-arg value="wellness/reports/reportsHome.page" />
-		<constructor-arg value="kenyaui:apps/reports.png" />
+		<constructor-arg value="wellness:apps/analytics.svg" />
 		<constructor-arg value="500" />
 	</bean>
 
@@ -73,7 +73,7 @@
 		<constructor-arg value="wellness.admin" />
 		<constructor-arg value="Admin" />
 		<constructor-arg value="wellness/admin/adminHome.page" />
-		<constructor-arg value="kenyaui:apps/admin.png" />
+		<constructor-arg value="wellness:apps/settings.svg" />
 		<constructor-arg value="800" />
 	</bean>
 
@@ -81,7 +81,7 @@
 		<constructor-arg value="wellness.developer" />
 		<constructor-arg value="Developer" />
 		<constructor-arg value="wellness/developer/developerHome.page" />
-		<constructor-arg value="kenyaui:apps/developer.png" />
+		<constructor-arg value="wellness:apps/developer.svg" />
 		<constructor-arg value="1000000" />
 	</bean>
 
