@@ -256,9 +256,9 @@
     <ref key="BAND_1" uuid="62131663-df7f-4b44-b571-fc10932f4c60"/>
     <ref key="BAND_2" uuid="9d8ea901-ae00-49cf-96f7-206c0766d8be"/>
     <ref key="BAND_3" uuid="4bcbf753-1208-4acd-bb3a-8e1fe8e0ea05"/>
-    <ref key="CONTACT_CHANNEL" uuid="a84766a2-8403-40b3-82f8-f7f65dd03953"/>
-    <ref key="CONTACT_WALK_IN" uuid="1b69c447-e453-497e-87da-4b6f4a9fa3ba"/>
-    <ref key="CONTACT_CALL" uuid="effb7cdd-ca17-4aaf-8cb3-72a347023aaf"/>
+    <ref key="CONTACT_CHANNEL" uuid="519600b3-bb68-497b-a1ed-6f8c41502426"/>
+    <ref key="CONTACT_WALK_IN" uuid="f7ed6a1c-3a1d-4ea3-a5ec-c37eaf3acede"/>
+    <ref key="CONTACT_CALL" uuid="356a0afa-e0a2-43e0-b04d-bd5e4074ccf8"/>
 
 
 </refs>
