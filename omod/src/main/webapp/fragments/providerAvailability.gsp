@@ -69,7 +69,7 @@ table.toggle tr:nth-child(odd) {
                 var start = jQuery.fullCalendar.moment(data.start);
                 var end = jQuery.fullCalendar.moment(data.end);
                 var duration = jQuery.fullCalendar.formatRange(start, end, 'h:mm');
-                tooltip = '<div class="tooltiptopicevent twptooltip" style="width:auto;height:auto;background:#c0c0c0;position:absolute;z-index:10001;padding:10px 10px 10px 10px ;  line-height: 200%;">' + 'Client: ' + ': ' + data.client + '</br>' + 'Type : ' + data.type + '</br>' + 'Time: ' + ': ' + duration + '</div>';
+                tooltip = '<div class="tooltiptopicevent twptooltip" style="width:auto;height:auto;background:#c0c0c0;position:absolute;z-index:10001;padding:10px 10px 10px 10px ;  line-height: 200%;font-size: 20px;">' + 'Client: ' + ': ' + data.client + '</br>' + 'Type : ' + data.type + '</br>' + 'Time: ' + ': ' + duration + '</br>' + 'Phone No. ' + ': ' + data.mobile + '</br>'+ '</div>';
 
 
                 jQuery("body").append(tooltip);

@@ -12,6 +12,7 @@ import org.openmrs.module.appointmentscheduling.Appointment;
 import org.openmrs.module.appointmentscheduling.AppointmentBlock;
 import org.openmrs.module.appointmentscheduling.api.AppointmentService;
 import org.openmrs.module.wellness.EmrConstants;
+import org.openmrs.module.wellness.wrapper.PatientWrapper;
 import org.openmrs.ui.framework.UiUtils;
 import org.openmrs.ui.framework.fragment.FragmentModel;
 import org.openmrs.util.OpenmrsUtil;
@@ -150,6 +151,11 @@ public class ProviderAvailabilityFragmentController {
             }
             try {
                 JSONObject jsonObject = new JSONObject();
+                String mobile = "N/A";
+                PatientWrapper wrapper = new PatientWrapper(appointment.getPatient());
+                if (wrapper.getMobileNumber() != null) {
+                    mobile = wrapper.getMobileNumber();
+                }
                 jsonObject.put("title", appointment.getProvider().getName() + " -" + appointment.getAppointmentType().getDisplayString());
                 jsonObject.put("client", appointment.getPatient().getPerson().getGivenName() + " " + appointment.getPatient().getPerson().getFamilyName());
                 jsonObject.put("type", appointment.getAppointmentType().getDisplayString());
@@ -160,6 +166,7 @@ public class ProviderAvailabilityFragmentController {
                 jsonObject.put("start", start);
                 jsonObject.put("end", end);
                 jsonObject.put("color", providerColors.get(appointment.getProvider().getName()));
+                jsonObject.put("mobile", mobile);
                 jsonArray.add(jsonObject);
             } catch (Exception e) {
                 log.error("JSON Object Exception" + e.toString());
