@@ -74,6 +74,13 @@ public class HomePageController {
         }
 		String user_name = Context.getAuthenticatedUser().getGivenName();
 
+        for (Iterator<AppDescriptor> iterator = apps.iterator(); iterator.hasNext(); ) {
+            AppDescriptor app = iterator.next();
+            if (app.getIcon() == null) {
+                iterator.remove();
+            }
+        }
+
 		model.addAttribute("apps", apps);
 		model.addAttribute("user",user_name);
 		model.addAttribute("role",role);
