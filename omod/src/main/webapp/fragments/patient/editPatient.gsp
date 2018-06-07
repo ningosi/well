@@ -7,6 +7,7 @@
     ui.includeCss("wellness", "font-awesome.min.css", 27)
     ui.includeCss("wellness", "style2.css", 26)
     ui.includeCss("wellness", "bootstrap.min.css", 26)
+    ui.includeCss("wellness", "registration.css", 25)
     ui.includeJavascript("wellness", "jquery-3.3.1.min.js")
     ui.includeJavascript("wellness", "bootstrap.min.js")
 
@@ -184,7 +185,7 @@
                                     </table>
                                 </fieldset>
                                 <fieldset>
-                                    <legend>Contact Channell</legend>
+                                    <legend>Contact Channel</legend>
                                     <% channells.each { %>
                                     ${ui.includeFragment("kenyaui", "widget/rowOfFields", [fields: it])}
                                     <% } %>
@@ -274,7 +275,7 @@
                                     <legend>Medical History</legend>
                                     <table width="80%">
                                         <div class="row">
-                                            <div class="col-lg-3">
+                                            <div class="col-lg-3 .ke-field-label">
                                                 <input type="checkbox" name="hbp" id="hbp"
                                                        value="${high_pressure}" ${command.hbp ? 'checked="checked"' : ''}>High Blood Pressure
                                             </div>

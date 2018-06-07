@@ -14,11 +14,10 @@
 
 package org.openmrs.module.wellness.page.controller;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openmrs.Provider;
 import org.openmrs.User;
 import org.openmrs.api.context.Context;
@@ -38,7 +37,7 @@ import javax.servlet.http.HttpSession;
  * Home page controller
  */
 public class HomePageController {
-	
+
 	public String controller(PageModel model, UiUtils ui, HttpSession session, @SpringBean KenyaUiUtils kenyaUi) {
 
 		// Redirect to setup page if module is not yet configured
