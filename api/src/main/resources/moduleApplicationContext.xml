@@ -40,7 +40,7 @@
 		<constructor-arg value="Manager" />
 		<constructor-arg value="wellness/manager/managerHome.page" />
 		<constructor-arg value="wellness:apps/datamgr.svg" />
-		<constructor-arg value="350" />
+		<constructor-arg value="400" />
 	</bean>
     <!--
 	<bean id="wellness.app.orders" factory-bean="kenyacore.appFactoryBean" factory-method="createInstance">
@@ -84,6 +84,14 @@
 		<constructor-arg value="wellness:apps/developer.svg" />
 		<constructor-arg value="1000000" />
 	</bean>
+
+    <bean id="wellness.app.inventory" factory-bean="kenyacore.appFactoryBean" factory-method="createInstance">
+        <constructor-arg value="wellness.inventory" />
+        <constructor-arg value="Inventory &amp; Orders" />
+        <constructor-arg value="wellness/inventory/inventoryHome.page" />
+        <constructor-arg value="wellness:apps/warehouse.svg" />
+        <constructor-arg value="350" />
+    </bean>
 
 	<!-- ===================== Lab test catalogs ===================== -->
 

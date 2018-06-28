@@ -12,30 +12,22 @@
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
 
-package org.openmrs.module.wellness.page.controller.intake;
+package org.openmrs.module.wellness.page.controller.inventory;
 
 import org.openmrs.Patient;
-import org.openmrs.module.kenyaui.form.AbstractWebForm;
+import org.openmrs.module.kenyaui.annotation.AppPage;
 import org.openmrs.module.wellness.EmrConstants;
 import org.openmrs.module.wellness.EmrWebConstants;
-import org.openmrs.module.kenyaui.annotation.AppPage;
-import org.openmrs.ui.framework.SimpleObject;
 import org.openmrs.ui.framework.UiUtils;
 import org.openmrs.ui.framework.page.PageModel;
 
 /**
- * Homepage for the intake app
+ * Homepage for the inventory app
  */
-@AppPage(EmrConstants.APP_INTAKE)
-public class IntakeHomePageController {
-	
-	public String controller(UiUtils ui, PageModel model) {
-		Patient patient = (Patient) model.getAttribute(EmrWebConstants.MODEL_ATTR_CURRENT_PATIENT);
+@AppPage(EmrConstants.APP_INVENTORY)
+public class AddStockPageController {
 
-		if (patient != null) {
-			return "redirect:" + ui.pageLink(EmrConstants.MODULE_ID, "intake/intakeViewPatient", SimpleObject.create("patientId", patient.getId()));
-		} else {
-			return null;
-		}
+	public String controller(UiUtils ui, PageModel model) {
+        return null;
 	}
 }

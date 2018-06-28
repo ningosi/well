@@ -210,7 +210,9 @@ public class ProviderAvailabilityFragmentController {
 
         //Updating session variables
         Calendar cal = OpenmrsUtil.getDateTimeFormat(Context.getLocale()).getCalendar();
-        cal.setTimeInMillis(fromDate);
+        if(fromDate !=null) {
+            cal.setTimeInMillis(fromDate);
+        }
         Date fromDateAsDate = cal.getTime();
         cal.setTimeInMillis(toDate);
         Date toDateAsDate = cal.getTime();
