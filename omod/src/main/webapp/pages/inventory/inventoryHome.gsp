@@ -8,9 +8,9 @@
     ui.includeJavascript("wellness", "controllers/appointments.js")
 
     def menuItems = [
-            [label: "Dispensation", iconProvider: "wellness", icon: "buttons/notepad.svg", href: ui.pageLink("wellness", "intake/providerAvailability")],
+            [label: "Dispensation", iconProvider: "wellness", icon: "buttons/notepad.svg", href: ui.pageLink("wellness", "inventory/dispensationHome")],
             [label: "Stock taking", iconProvider: "wellness", icon: "buttons/notepad.svg", href: ui.pageLink("wellness", "intake/appointmentTypes")],
-            [label: "Inventory list", iconProvider: "wellness", icon: "buttons/list.svg", href: ui.pageLink("wellness", "intake/manageAppointments")],
+            [label: "Inventory list", iconProvider: "wellness", icon: "buttons/list.svg", href: ui.pageLink("wellness", "inventory/inventoryList")],
             [label: "All Orders ", iconProvider: "wellness", icon: "buttons/orders.svg", href: ui.pageLink("wellness", "intake/manageAppointments")]
     ]
 %>
@@ -36,6 +36,7 @@ img {
 </div>
 
 <script type="text/javascript">
+    ${ui.includeJavascript("wellness", "chosen.jquery.min.js")}
     jQuery(function () {
         jQuery('input[name="query"]').focus();
     });

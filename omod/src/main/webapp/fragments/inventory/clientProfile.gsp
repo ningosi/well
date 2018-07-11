@@ -10,14 +10,60 @@
     ui.includeCss("wellness", "chosen.min.css", 26)
 
 %>
-<style>
-.card {
-    padding-left: 20px;
-}
-</style>
-
 <div class="ke-panel-frame">
-    <div class="ke-panel-heading">Add Stock</div>
+    <div class="ke-panel-heading">Client Information</div>
+
+    <div class="ke-panel-content">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="card">
+                    <div class="card-body" style="text-align: center;">
+                        <div class="mx-auto d-block">
+                            <% if (url) { %>
+                            <img class="img-circle mx-auto d-block" src="data:image/jpeg;base64,${url}"
+                                 style="width: 150px; height: 150px;"/>
+                            <% } else { %>
+                            <img class="img-circle mx-auto d-block" src="${fakeUrl}"
+                                 style="width: 150px; height: 150px;"/>
+                            <% } %>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <% if (name) { %>
+                        <h5 class="text-sm-center mt-2 mb-1 padding-5 text">Name : ${name} ${second_name}</h5>
+                        <% } %>
+                        <% if (email) { %>
+                        <h5 class="text-sm-center mt-2 mb-1 padding-5 text">Email : ${email}</h5>
+                        <% } %>
+                        <% if (mobileNumber) { %>
+                        <h5 class="text-sm-center mt-2 mb-1 padding-5 text" >Phone Number : ${mobileNumber}</h5>
+                        <% } %>
+                        <% if (email) { %>
+                        <h5 class="text-sm-center mt-2 mb-1 padding-5 text">Town : ${email}</h5>
+                        <% } %>
+                        <% if (home) { %>
+                        <h5 class="text-sm-center mt-2 mb-1 padding-5 text">Home : ${home}</h5>
+                        <% } %>
+                        <% if (box) { %>
+                        <h5 class="text-sm-center mt-2 mb-1 padding-5 text">Address : ${box}</h5>
+                        <% } %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="ke-panel-frame" style="margin-top: 10px;">
+    <div class="ke-panel-heading">Dispense</div>
 
     <div class="ke-panel-content">
         <div class="row">
@@ -29,46 +75,23 @@
                     <div class="card-body">
                         <div id="item-details">
                             <div class="card-body">
-                                <div class="card-title">
-                                    <h3 class="text-center">Item Details</h3>
-                                </div>
-                                <hr>
-
-                                <form action="${ui.actionLink("wellness", "inventory/addStock", "post")}" method="post" novalidate="novalidate">
+                                <form action="${ui.actionLink("wellness", "inventory/addStock", "post")}" method="post"
+                                      novalidate="novalidate">
                                     <div class="form-group">
-                                        <label for="name" class="control-label mb-1">Item Name</label>
-                                        <input id="name" name="name" type="text" class="form-control"
-                                               aria-required="true" aria-invalid="false">
-                                    </div>
-
-                                    <div class="form-group has-success">
-                                        <label for="code" class="control-label mb-1">Item code</label>
-                                        <input id="code" name="code" type="text"
-                                               class="form-control cc-name valid" data-val="true"
-                                               data-val-required="Please enter the name on card"
-                                               aria-required="true">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="description" class="control-label mb-1">Description</label>
-                                        <input id="description" name="description" type="text"
-                                               class="form-control cc-number identified visa" data-val="true"
-                                               data-val-required="Please enter the card number"
-                                               data-val-cc-number="Please enter a valid card number"
-                                               >
-                                        <span class="help-block" data-valmsg-for="cc-number"
-                                              data-valmsg-replace="true"></span>
+                                        <label for="address" class="control-label mb-1">Delivery Address</label>
+                                        <input id="address" name="address" type="text"
+                                               class="form-control cc-number identified visa" data-val="true">
                                     </div>
 
                                     <div class="row form-group">
                                         <div class="col col-md-3"><label for="type"
-                                                                         class=" form-control-label">Item Type</label>
+                                                                         class=" form-control-label">Supplement Item</label>
                                         </div>
 
                                         <div class="col-12 col-md-9">
                                             <select name="type" id="type" class="form-control">
-                                                <% itemTypes.each { %>
-                                                <option value="${it.type_id}">${it.name}</option>
+                                                <% inventoryItems.each { %>
+                                                <option value="${it.id}">${it.name}</option>
                                                 <% } %>
                                             </select>
                                         </div>
@@ -79,11 +102,13 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="quantity" class="control-label mb-1">Quantity</label>
-                                                <input id="quantity" name="quantity" type="number"
+                                                <input id="quantity" name="quantity" type="tel"
+                                                       class="form-control cc-exp"
                                                        value="" data-val="true"
                                                        data-val-required="Please enter the quantity"
+                                                       data-val-cc-exp="Please enter a valid month and year"
                                                        placeholder="Quantity">
-                                                <span class="help-block" data-valmsg-for="quantity"
+                                                <span class="help-block" data-valmsg-for="cc-exp"
                                                       data-valmsg-replace="true"></span>
                                             </div>
                                         </div>
