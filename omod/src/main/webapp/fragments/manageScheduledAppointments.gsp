@@ -32,7 +32,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Provider:</td>
+                                    <td>Partner:</td>
                                     <td>
                                         <select name="provider" id="provider">
                                             <option value="${provider.providerId}">${provider.name}</option>

@@ -12,7 +12,7 @@
             <td>${time}</td>
         </tr>
         <tr>
-            <td>Provider</td>
+            <td>Partner</td>
             <td>${provider}</td>
         </tr>
         <tr>

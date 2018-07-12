@@ -1,0 +1,13 @@
+
+legend{
+    font-size: 18px;
+}
+.ke-field-label{
+    background-color: #ffffff;
+    font-weight: normal;
+    font-size: 14px;
+    padding-left: 10px;
+}
+.ke-field-content{
+    padding-left: 10px;
+}

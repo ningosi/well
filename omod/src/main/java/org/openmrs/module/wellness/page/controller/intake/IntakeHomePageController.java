@@ -15,6 +15,7 @@
 package org.openmrs.module.wellness.page.controller.intake;
 
 import org.openmrs.Patient;
+import org.openmrs.module.kenyaui.form.AbstractWebForm;
 import org.openmrs.module.wellness.EmrConstants;
 import org.openmrs.module.wellness.EmrWebConstants;
 import org.openmrs.module.kenyaui.annotation.AppPage;

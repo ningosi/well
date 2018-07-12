@@ -14,10 +14,12 @@
 
 package org.openmrs.module.wellness.page.controller;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.openmrs.Provider;
+import org.openmrs.User;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.appframework.domain.AppDescriptor;
 import org.openmrs.module.appframework.service.AppFrameworkService;
@@ -35,7 +37,7 @@ import javax.servlet.http.HttpSession;
  * Home page controller
  */
 public class HomePageController {
-	
+
 	public String controller(PageModel model, UiUtils ui, HttpSession session, @SpringBean KenyaUiUtils kenyaUi) {
 
 		// Redirect to setup page if module is not yet configured
@@ -54,8 +56,34 @@ public class HomePageController {
 				return OpenmrsUtil.compareWithNullAsGreatest(left.getOrder(), right.getOrder());
 			}
 		});
+        User user = Context.getAuthenticatedUser();
+        Collection<Provider> providers = Context.getProviderService().getProvidersByPerson(user.getPerson());
+        String role = "";
+//        if(user.isSuperUser()){
+//            role = "Super User";
+//        }else if(!providers.isEmpty()){
+//            role="provider";
+//            for (Provider provider: providers){
+//                role  = role + "" + provider.getId();
+//            }
+//        }
+        if(user.hasRole("Support")){
+            role = "support";
+        }else{
+            role = "not support";
+        }
+		String user_name = Context.getAuthenticatedUser().getGivenName();
+
+        for (Iterator<AppDescriptor> iterator = apps.iterator(); iterator.hasNext(); ) {
+            AppDescriptor app = iterator.next();
+            if (app.getIcon() == null) {
+                iterator.remove();
+            }
+        }
 
 		model.addAttribute("apps", apps);
+		model.addAttribute("user",user_name);
+		model.addAttribute("role",role);
 		
 		return null;
 	}

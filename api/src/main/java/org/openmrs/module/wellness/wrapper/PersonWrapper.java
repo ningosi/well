@@ -62,4 +62,21 @@ public class PersonWrapper extends AbstractPersonWrapper {
 	public void setEmailAddress(String value) {
 		setAsAttribute(CommonMetadata._PersonAttributeType.EMAIL_ADDRESS, value);
 	}
+
+	//set and get provider here
+    /*
+    *Gets provider assigned to a client
+    * @return the provider id
+    */
+    public String getProvider(){
+	    return getAsAttribute(CommonMetadata._PersonAttributeType.PROVIDER);
+    }
+
+    /**
+     * Sets provider
+     * @param value the provider id
+     */
+    public void setProvider(String value) {
+        setAsAttribute(CommonMetadata._PersonAttributeType.PROVIDER, value);
+    }
 }

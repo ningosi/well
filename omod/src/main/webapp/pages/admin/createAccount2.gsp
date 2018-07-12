@@ -13,7 +13,7 @@
 		<div class="ke-panel-heading">Help</div>
 		<div class="ke-panel-content">
 			If the account is for a user who will login into the system, you must specify login details. If the account
-			is for someone who can provide care to patients, then you must specify a provider ID.
+			is for someone who can provide care to patients, then you must specify a partner ID.
 		</div>
 	</div>
 </div>

@@ -100,7 +100,7 @@
 	</fieldset>
 
 	<fieldset>
-		<legend>Provider Info</legend>
+		<legend>Partner Info</legend>
 		<% providerFields.each { %>
 			${ ui.includeFragment("kenyaui", "widget/rowOfFields", [ fields: it ]) }
 		<% } %>

@@ -12,7 +12,7 @@
 	<span class="ke-field-content">
 		<input type="radio" ng-model="which" ng-change="updateSearch()" value="all" /> All
 		&nbsp;&nbsp;
-		<input type="radio" ng-model="which" ng-change="updateSearch()" value="providers" /> Providers
+		<input type="radio" ng-model="which" ng-change="updateSearch()" value="providers" /> Partners
 		&nbsp;&nbsp;
 		<input type="radio" ng-model="which" ng-change="updateSearch()" value="users" /> Users
 	</span>

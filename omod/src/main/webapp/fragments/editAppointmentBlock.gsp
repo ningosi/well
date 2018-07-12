@@ -7,7 +7,7 @@
                     <input type="hidden" name="blockId" id="blockId" value="${blockId}" />
                     <tr>
                         <td>
-                            <label class="ke-field-label">Provider:</label>
+                            <label class="ke-field-label">Partner:</label>
                             <span class="ke-field-content">
                                 <select name="chosenProviderId" id="chosenProviderId">
                                     <% providerList.each{%>

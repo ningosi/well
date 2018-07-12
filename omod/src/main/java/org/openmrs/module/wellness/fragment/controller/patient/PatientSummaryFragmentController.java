@@ -17,6 +17,7 @@ package org.openmrs.module.wellness.fragment.controller.patient;
 import org.openmrs.Patient;
 import org.openmrs.PatientIdentifier;
 import org.openmrs.PersonAddress;
+import org.openmrs.Provider;
 import org.openmrs.api.context.Context;
 import org.openmrs.calculation.patient.PatientCalculation;
 import org.openmrs.calculation.patient.PatientCalculationService;
@@ -62,6 +63,7 @@ public class PatientSummaryFragmentController {
 		String town = "";
 		String home = "";
 		String email = "";
+		String provider = "";
 		if(patient.getAddresses().size() > 0) {
 			for(PersonAddress address : patient.getAddresses()) {
 				if(address.getAddress1() != null){
@@ -89,6 +91,12 @@ public class PatientSummaryFragmentController {
 		model.addAttribute("mobileNumber", patientWrapper.getMobileNumber());
 		model.addAttribute("otherMobileNumber", patientWrapper.getOtherMobileNumber());
 		model.addAttribute("passport", patientWrapper.getPassportNumber());
+		if(patientWrapper.getPerson()!=null) {
+            if (patientWrapper.getPerson().getProvider() != null && !patientWrapper.getPerson().getProvider().isEmpty() ) {
+                provider = Context.getProviderService().getProvider(Integer.parseInt(patientWrapper.getPerson().getProvider())).getName();
+            }
+        }
+		model.addAttribute("provider", provider);
 
 
 

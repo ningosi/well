@@ -153,7 +153,7 @@ public class EnterHtmlFormFragmentController {
 			return simplifyErrors(validationErrors, fes.getContext());
 		}
 
-		// No validation errors found so continue process of form submission
+		// No validation errors found2 so continue process of form submission
 		fes.prepareForSubmit();
 		fes.getSubmissionController().handleFormSubmission(fes, actionRequest.getHttpRequest());
 

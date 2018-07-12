@@ -2,6 +2,8 @@
 	ui.decorateWith("wellness", "standardPage", [ layout: "sidebar" ])
 
 	ui.includeJavascript("wellness", "controllers/visit.js")
+    ui.includeCss("wellness", "background.css", 29)
+    ui.includeCss("wellness", "font-awesome.min.css", 28)
 
 	def menuItems = [
 			[ label: "Find or create client", iconProvider: "kenyaui", icon: "buttons/patient_search.png", href: ui.pageLink("wellness", "registration/registrationSearch") ],

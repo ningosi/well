@@ -1,5 +1,6 @@
 <%
     ui.decorateWith("wellness", "standardPage", [ layout: "sidebar" ])
+    ui.includeCss("wellness", "background.css", 29)
     def menuItems = [
             [ label: "Back to home", iconProvider: "kenyaui", icon: "buttons/back.png", label: "Back to home", href: ui.pageLink("wellness", "registration/registrationHome") ]
     ]
