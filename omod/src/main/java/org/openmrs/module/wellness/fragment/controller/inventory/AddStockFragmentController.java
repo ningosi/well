@@ -45,6 +45,7 @@ public class AddStockFragmentController {
                        @RequestParam(value = "code", required = false) String code,
                        @RequestParam(value = "description", required = false) String description,
                        @RequestParam(value = "quantity") int quantity,
+                       @RequestParam(value = "type") int type,
                        @RequestParam(value = "expiration", required = false) String expiration) {
         log.error("Posting " + name);
         InventoryItem inventoryItem = new InventoryItem();
@@ -64,6 +65,10 @@ public class AddStockFragmentController {
 
         try {
             InventoryService inventoryService = Context.getService(InventoryService.class);
+            InventoryItemTypeService itemTypeService = Context.getService(InventoryItemTypeService.class);
+            ItemType itemType = itemTypeService.getItemType(type);
+            inventoryItem.setItemType(itemType);
+
             inventoryService.saveInventoryItem(inventoryItem);
             inventoryService.saveItemStockDetail(itemStockDetails);
         } catch (Exception e) {

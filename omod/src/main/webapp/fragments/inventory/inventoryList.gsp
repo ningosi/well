@@ -25,11 +25,10 @@
             <div class="content mt-3">
                 <div class="animated fadeIn">
                     <div class="row">
-
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <strong class="card-title">Inventory Item types</strong>
+                                    <strong class="card-title">Supplements </strong>
                                 </div>
 
                                 <div class="card-body">
@@ -44,8 +43,8 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <% inventoryItems.each { %>
                                         <tr>
-                                            <% inventoryItems.each { %>
                                             <td>${it.name}</td>
                                             <td>${it.description}</td>
                                             <td>${it.itemCode}</td>
@@ -55,8 +54,8 @@
                                                 <td>Unknown</td>
                                             <%}%>
                                             <td>${it.itemsNum}</td>
-                                            <% } %>
                                         </tr>
+                                        <% } %>
 
                                         </tbody>
                                     </table>

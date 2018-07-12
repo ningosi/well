@@ -43,15 +43,15 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <% itemTypes.each { %>
                                         <tr>
-                                            <% itemTypes.each { %>
                                             <td>${it.name}</td>
                                             <td>${it.name}</td>
                                             <td>${it.name}</td>
                                             <td>${it.itemsNum}</td>
-                                            <% } %>
-                                        </tr>
 
+                                        </tr>
+                                        <% } %>
                                         </tbody>
                                     </table>
                                 </div>
