@@ -7,7 +7,8 @@
 			items: [
 					[ iconProvider: "kenyaui", icon: "buttons/users_manage.png", label: "Manage accounts", href: ui.pageLink("wellness", "admin/manageAccounts") ],
 					[ iconProvider: "kenyaui", icon: "buttons/report_queue.png", label: "Manage report queue", href: ui.pageLink("wellness", "admin/manageReportQueue") ],
-					[ iconProvider: "kenyaui", icon: "buttons/report_queue.png", label: "Upload legacy data", href: ui.pageLink("wellness", "admin/manageLegacyData") ]
+					[ iconProvider: "kenyaui", icon: "buttons/report_queue.png", label: "Upload legacy data", href: ui.pageLink("wellness", "admin/manageLegacyData") ],
+                    [ iconProvider: "kenyaui", icon: "buttons/report_queue.png", label: "Manage Inventory", href: ui.pageLink("wellness", "admin/manageInventory") ]
 			]
 	]) }
 </div>
