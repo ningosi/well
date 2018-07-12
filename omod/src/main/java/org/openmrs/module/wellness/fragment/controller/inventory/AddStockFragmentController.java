@@ -41,10 +41,10 @@ public class AddStockFragmentController {
     }
 
     public String post(FragmentModel model, UiUtils ui,
-                       @RequestParam(value = "name", required = true) String name,
+                       @RequestParam(value = "name") String name,
                        @RequestParam(value = "code", required = false) String code,
                        @RequestParam(value = "description", required = false) String description,
-                       @RequestParam(value = "quantity", required = true) int quantity,
+                       @RequestParam(value = "quantity") int quantity,
                        @RequestParam(value = "expiration", required = false) String expiration) {
         log.error("Posting " + name);
         InventoryItem inventoryItem = new InventoryItem();
@@ -55,6 +55,8 @@ public class AddStockFragmentController {
         inventoryItem.setUuid(String.valueOf(UUID.randomUUID()));
 
         ItemStockDetails itemStockDetails = new ItemStockDetails();
+        String stockName = String.format("Stock_%s",name);
+        itemStockDetails.setName(stockName);
         itemStockDetails.setQuantity(quantity);
         itemStockDetails.setUuid(String.valueOf(UUID.randomUUID()));
         itemStockDetails.setInventoryItem(inventoryItem);
