@@ -17,8 +17,8 @@
 }
 </style>
 
-<div class="ke-panel-frame">
-    <div class="ke-panel-heading">All Inventory Items</div>
+<div class="ke-panel-frame" style="margin-top: 20px">
+    <div class="ke-panel-heading">Inventory Item Types</div>
 
     <div class="ke-panel-content">
         <div class="row">
@@ -38,22 +38,16 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Description</th>
-                                            <th>Item Code</th>
-                                            <th>Items Type</th>
-                                            <th>Available Units</th>
+                                            <th>Office</th>
+                                            <th>IItems in Type</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <% inventoryItems.each { %>
+                                            <% itemTypes.each { %>
                                             <td>${it.name}</td>
-                                            <td>${it.description}</td>
-                                            <td>${it.itemCode}</td>
-                                            <% if(it.itemType) {%>
-                                                <td>${it.itemType.name}</td>
-                                            <%} else {%>
-                                                <td>Unknown</td>
-                                            <%}%>
+                                            <td>${it.name}</td>
+                                            <td>${it.name}</td>
                                             <td>${it.itemsNum}</td>
                                             <% } %>
                                         </tr>
