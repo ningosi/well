@@ -17,18 +17,12 @@
 </style>
 
 <div class="ke-panel-frame">
-    <div class="ke-panel-heading">Add Stock</div>
+    <div class="ke-panel-heading">All Inventory Items</div>
 
     <div class="ke-panel-content">
         <div class="row">
             <div class="col-lg-6">
-                <!-- start form -->
 
-                <div class="card">
-
-                </div> <!-- .card -->
-
-            <!-- End form -->
             </div>
         </div>
     </div>
