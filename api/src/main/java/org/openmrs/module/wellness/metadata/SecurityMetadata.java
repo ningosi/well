@@ -53,6 +53,7 @@ public class SecurityMetadata extends AbstractMetadataBundle {
 		public static final String REGISTRATION = "Registration";
 		public static final String SYSTEM_ADMIN = "System Administrator";
 		public static final String SYSTEM_DEVELOPER = "System Developer";
+		public static final String INVENTORY = "Inventory";
 	}
 
 	/**
@@ -70,7 +71,8 @@ public class SecurityMetadata extends AbstractMetadataBundle {
 				EmrConstants.APP_MANAGER,
 				EmrConstants.APP_ORDERS,
 				DqConstants.APP_DATAQUALITY,
-				DqConstants.APP_DATAMANAGER
+				DqConstants.APP_DATAMANAGER,
+                EmrConstants.APP_INVENTORY
 		};
 
 		// Ensure a privilege exists for each app. App framework does create these but not always before this
@@ -156,6 +158,14 @@ public class SecurityMetadata extends AbstractMetadataBundle {
 						app(DqConstants.APP_DATAQUALITY)
 				)
 		));
+
+        install(role(_Role.INVENTORY, "Can access the inventory app",
+                idSet(_Role.API_PRIVILEGES_VIEW_AND_EDIT),
+                idSet(
+                        app(EmrConstants.APP_INVENTORY),
+                        app(DqConstants.APP_DATAQUALITY)
+                )
+        ));
 	}
 
 	/**
