@@ -74,6 +74,16 @@ public class ClientProfileFragmentController {
         model.addAttribute("mobileNumber", patientWrapper.getMobileNumber());
         model.addAttribute("otherMobileNumber", patientWrapper.getOtherMobileNumber());
         model.addAttribute("passport", patientWrapper.getPassportNumber());
+        String providerId = patientWrapper.getPerson().getProvider();
+
+        String providerName = null;
+        if(providerId != null){
+            Provider provider = Context.getProviderService().getProvider(Integer.valueOf(providerId));
+            if ((provider != null)) {
+                providerName = provider.getName();
+            }
+        }
+        model.addAttribute("partner", providerName);
 
         List<InventoryItem> inventoryItems = new ArrayList<InventoryItem>();
         try {

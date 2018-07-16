@@ -42,7 +42,12 @@
                         <h5 class="text-sm-center mt-2 mb-1 padding-5 text">Email : ${email}</h5>
                         <% } %>
                         <% if (mobileNumber) { %>
-                        <h5 class="text-sm-center mt-2 mb-1 padding-5 text" >Phone Number : ${mobileNumber}</h5>
+                        <h5 class="text-sm-center mt-2 mb-1 padding-5 text">Phone Number : ${mobileNumber}</h5>
+                        <% } %>
+                        <% if (partner) { %>
+                        <h5 class="text-sm-center mt-2 mb-1 padding-5 text">Partner : ${partner}</h5>
+                        <% } else { %>
+                        <h5 class="text-sm-center mt-2 mb-1 padding-5 text">Partner : Not assigned a patner</h5>
                         <% } %>
                         <% if (email) { %>
                         <h5 class="text-sm-center mt-2 mb-1 padding-5 text">Town : ${email}</h5>

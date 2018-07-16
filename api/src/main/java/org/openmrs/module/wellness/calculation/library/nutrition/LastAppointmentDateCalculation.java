@@ -23,7 +23,7 @@ public class LastAppointmentDateCalculation extends AbstractPatientCalculation {
             if(allPatientsAppointment.size() > 0){
                 Appointment lastAppointment = allPatientsAppointment.get(allPatientsAppointment.size() - 1);
                 if(lastAppointment != null){
-                    appointmentDate = lastAppointment.getTimeSlot().getEndDate();
+                    appointmentDate = lastAppointment.getStartDateTime();
                 }
             }
             ret.put(ptId, new SimpleResult(appointmentDate, this));

@@ -15,7 +15,6 @@
 package org.openmrs.module.wellness.calculation.library;
 
 import org.openmrs.Encounter;
-import org.openmrs.Program;
 import org.openmrs.api.context.Context;
 import org.openmrs.calculation.patient.PatientCalculationContext;
 import org.openmrs.calculation.result.CalculationResultMap;
@@ -24,15 +23,13 @@ import org.openmrs.module.appointmentscheduling.Appointment;
 import org.openmrs.module.appointmentscheduling.api.AppointmentService;
 import org.openmrs.module.kenyacore.calculation.AbstractPatientCalculation;
 import org.openmrs.module.kenyacore.calculation.Calculations;
-import org.openmrs.module.kenyacore.calculation.Filters;
 import org.openmrs.module.kenyacore.calculation.PatientFlagCalculation;
-import org.openmrs.module.wellness.Dictionary;
 import org.openmrs.module.wellness.calculation.EmrCalculationUtils;
-import org.openmrs.module.wellness.metadata.NutritionMetadata;
-import org.openmrs.module.metadatadeploy.MetadataUtils;
-import org.openmrs.module.wellness.util.EmrUtils;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Calculates whether patients have missed their last scheduled return visit. Calculation returns true if the patient is
