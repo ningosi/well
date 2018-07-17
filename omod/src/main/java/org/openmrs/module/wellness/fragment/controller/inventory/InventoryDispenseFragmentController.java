@@ -1,5 +1,6 @@
 package org.openmrs.module.wellness.fragment.controller.inventory;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
@@ -13,6 +14,8 @@ import org.openmrs.module.metadatadeploy.MetadataUtils;
 import org.openmrs.module.wellness.metadata.CommonMetadata;
 import org.openmrs.module.wellness.wrapper.PatientWrapper;
 import org.openmrs.module.wellnessinventory.api.model.InventoryItem;
+import org.openmrs.module.wellnessinventory.api.model.ItemOrder;
+import org.openmrs.module.wellnessinventory.api.service.InventoryOrderService;
 import org.openmrs.module.wellnessinventory.api.service.InventoryService;
 import org.openmrs.ui.framework.UiUtils;
 import org.openmrs.ui.framework.annotation.FragmentParam;
@@ -48,6 +51,7 @@ public class InventoryDispenseFragmentController {
             e.printStackTrace();
         }
         model.addAttribute("inventoryItems", inventoryItems);
+        model.addAttribute("client", patient);
 
 
     }
@@ -55,11 +59,32 @@ public class InventoryDispenseFragmentController {
     public String post(HttpServletRequest request,
                        FragmentModel model, UiUtils ui,
                        @RequestParam(value = "address", required = false) String address,
-                       @RequestParam(value = "quantity", required = false) String quantity,
-                       @RequestParam(value = "payment-mode", required = false) String paymentMode) {
+                       @RequestParam(value = "quantity", required = false) int quantity,
+                       @RequestParam(value = "payment-mode", required = false) String paymentMode,
+                       @RequestParam(value = "client", required = false) int clientId,
+                       @RequestParam(value = "isDelivery", required = false) Boolean isDelivery) {
 
         String[] supplements = request.getParameterValues("item[]");
+        log.error("client id" + clientId);
+        Patient patient = Context.getPatientService().getPatient(clientId);
+        try {
 
+            InventoryService itemService = Context.getService(InventoryService.class);
+            InventoryOrderService orderService = Context.getService(InventoryOrderService.class);
+            InventoryItem inventoryItem = itemService.getInventoryItem(Integer.valueOf(supplements[0]));
+
+            ItemOrder order = new ItemOrder();
+            order.setAddress(address);
+            order.setInventoryItem(inventoryItem);
+            order.setPaymentMode(paymentMode);
+            order.setQuantity(quantity);
+            order.setDelivery(isDelivery);
+            order.setClient(patient);
+            orderService.saveOrder(order);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }

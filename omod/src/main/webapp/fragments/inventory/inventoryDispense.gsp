@@ -24,35 +24,33 @@
                         <div id="item-details">
                             <div class="card-body">
 
-                                <form action="${ui.actionLink("wellness", "inventory/inventoryDispense", "post")}" method="post"
+                                <form action="${ui.actionLink("wellness", "inventory/inventoryDispense", "post")}"
+                                      method="post"
                                       novalidate="novalidate">
-                                    <div class="form-group">
-                                        <label for="address" class="control-label mb-1">Delivery Address</label>
-                                        <input id="address" name="address" type="text" class="form-control"
-                                               aria-required="true" aria-invalid="false">
-                                    </div>
 
                                     <div class="form-group">
                                         <label for="item"
                                                class=" form-control-label">Supplement</label>
-                                        <select data-placeholder="Supplement to dispense..." multiple class="standardSelect" name="item[]" id="item">
+                                        <select data-placeholder="Supplement to dispense..." multiple
+                                                class="standardSelect" name="item[]" id="item">
                                             <option value=""></option>
                                             <% inventoryItems.each { %>
                                             <option value="${it.id}">${it.name}</option>
                                             <% } %>
                                         </select>
                                     </div>
+                                    <input type="hidden" value="${client.id}" name="client">
 
                                     <div class="form-group">
 
-                                                <label for="quantity" class="control-label mb-1">Quantity</label>
-                                                <input id="quantity" name="quantity" type="number"
-                                                       class="form-control cc-exp" value="" data-val="true"
-                                                       data-val-required="Please enter the card expiration"
-                                                       data-val-cc-exp="Please enter a valid month and year"
-                                                       placeholder="Quantity" autocomplete="cc-exp">
-                                                <span class="help-block" data-valmsg-for="cc-exp"
-                                                      data-valmsg-replace="true"></span>
+                                        <label for="quantity" class="control-label mb-1">Quantity</label>
+                                        <input id="quantity" name="quantity" type="number"
+                                               class="form-control cc-exp" value="" data-val="true"
+                                               data-val-required="Please enter the card expiration"
+                                               data-val-cc-exp="Please enter a valid month and year"
+                                               placeholder="Quantity" autocomplete="cc-exp">
+                                        <span class="help-block" data-valmsg-for="cc-exp"
+                                              data-valmsg-replace="true"></span>
                                     </div>
 
                                     <div class="form-group">
@@ -63,6 +61,34 @@
                                                data-val-cc-number="Please enter a valid card number">
                                         <span class="help-block" data-valmsg-for="cc-number"
                                               data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label mb-1">Walk in or delivery?</label>
+
+                                        <div style="padding-left: 35px">
+                                            <div class="form-check">
+                                                <div class="radio">
+                                                    <label for="radio1" class="form-check-label ">
+                                                        <input type="radio" id="radio1" name="isDelivery" value="false"
+                                                               checked class="form-check-input">Walk In
+                                                    </label>
+                                                </div>
+
+                                                <div class="radio">
+                                                    <label for="radio2" class="form-check-label ">
+                                                        <input type="radio" id="radio2" name="isDelivery" value="true"
+                                                               class="form-check-input">To be delivered
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="address" class="control-label mb-1">Delivery Address</label>
+                                        <input id="address" name="address" type="text" class="form-control"
+                                               aria-required="true" aria-invalid="false">
                                     </div>
 
                                     <div>
@@ -87,7 +113,7 @@
     ui.includeJavascript("wellness", "chosen.jquery.min.js")
 %>
 <script>
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
         jQuery(".standardSelect").chosen({
             disable_search_threshold: 10,
             no_results_text: "Oops, nothing found!",
