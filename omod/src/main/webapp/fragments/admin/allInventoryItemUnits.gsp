@@ -18,7 +18,7 @@
 </style>
 
 <div class="ke-panel-frame" style="margin-top: 20px">
-    <div class="ke-panel-heading">Inventory Item Types</div>
+    <div class="ke-panel-heading">Inventory Item Units</div>
 
     <div class="ke-panel-content">
         <div class="row">
@@ -29,7 +29,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <strong class="card-title">Inventory Item types</strong>
+                                    <strong class="card-title">Inventory Item Units</strong>
                                 </div>
 
                                 <div class="card-body">
@@ -38,16 +38,13 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Description</th>
-                                            <th>IItems in Type</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <% itemTypes.each { %>
+                                        <% itemUnits.each { %>
                                         <tr>
                                             <td>${it.name}</td>
-                                            <td>${it.name}</td>
-                                            <td>${it.itemsNum}</td>
-
+                                            <td>${it.description}</td>
                                         </tr>
                                         <% } %>
                                         </tbody>

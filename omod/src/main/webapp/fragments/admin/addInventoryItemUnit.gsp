@@ -42,8 +42,8 @@
                                     </div>
 
                                     <div class="form-group has-success">
-                                        <label for="code" class="control-label mb-1">Description</label>
-                                        <input id="code" name="code" type="text"
+                                        <label for="description" class="control-label mb-1">Description</label>
+                                        <input id="description" name="description" type="text"
                                                class="form-control cc-name valid" data-val="true"
                                                data-val-required="Please enter the name on card"
                                                aria-required="true">
