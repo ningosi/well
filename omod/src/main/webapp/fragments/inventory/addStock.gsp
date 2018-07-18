@@ -39,7 +39,7 @@
                                     <div class="form-group">
                                         <label for="name" class="control-label mb-1">Item Name</label>
                                         <input id="name" name="name" type="text" class="form-control"
-                                               aria-required="true" aria-invalid="false">
+                                               aria-required="true" aria-invalid="false" required>
                                     </div>
 
                                     <div class="form-group has-success">
@@ -47,7 +47,7 @@
                                         <input id="code" name="code" type="text"
                                                class="form-control cc-name valid" data-val="true"
                                                data-val-required="Please enter the name on card"
-                                               aria-required="true">
+                                               aria-required="true" required>
                                     </div>
 
                                     <div class="form-group">
@@ -55,7 +55,7 @@
                                         <input id="description" name="description" type="text"
                                                class="form-control cc-number identified visa" data-val="true"
                                                data-val-required="Please enter the card number"
-                                               data-val-cc-number="Please enter a valid card number">
+                                               data-val-cc-number="Please enter a valid card number" required>
                                         <span class="help-block" data-valmsg-for="cc-number"
                                               data-valmsg-replace="true"></span>
                                     </div>
@@ -64,7 +64,7 @@
                                         <label for="type"
                                                class=" form-control-label">Item Type</label>
 
-                                        <select name="type" id="type" class="form-control">
+                                        <select name="type" id="type" class="form-control" required>
                                             <% itemTypes.each { %>
                                             <option value="${it.type_id}">${it.name}</option>
                                             <% } %>
@@ -81,7 +81,19 @@
                                                        class="form-control cc-exp" value="" data-val="true"
                                                        data-val-required="Please enter the card expiration"
                                                        data-val-cc-exp="Please enter a valid month and year"
-                                                       placeholder="Quantity" autocomplete="cc-exp">
+                                                       placeholder="Quantity" autocomplete="cc-exp" required>
+                                                <span class="help-block" data-valmsg-for="cc-exp"
+                                                      data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="unit" class="control-label mb-1">Unit</label>
+                                                <select name="unit" id="unit" class="form-control" required>
+                                                    <% itemUnits.each { %>
+                                                    <option value="${it.unit_id}">${it.name}</option>
+                                                    <% } %>
+                                                </select>
                                                 <span class="help-block" data-valmsg-for="cc-exp"
                                                       data-valmsg-replace="true"></span>
                                             </div>

@@ -54,6 +54,17 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="unit"
+                                               class=" form-control-label">Unit</label>
+
+                                        <select name="unit" id="unit" class="form-control">
+                                            <% itemUnits.each { %>
+                                            <option value="${it.unit_id}">${it.name}</option>
+                                            <% } %>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label for="payment-mode"
                                                class=" form-control-label">Payment Method</label>
 

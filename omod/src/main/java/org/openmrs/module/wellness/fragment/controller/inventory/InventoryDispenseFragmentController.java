@@ -15,8 +15,10 @@ import org.openmrs.module.wellness.metadata.CommonMetadata;
 import org.openmrs.module.wellness.wrapper.PatientWrapper;
 import org.openmrs.module.wellnessinventory.api.model.InventoryItem;
 import org.openmrs.module.wellnessinventory.api.model.ItemOrder;
+import org.openmrs.module.wellnessinventory.api.model.ItemUnit;
 import org.openmrs.module.wellnessinventory.api.service.InventoryOrderService;
 import org.openmrs.module.wellnessinventory.api.service.InventoryService;
+import org.openmrs.module.wellnessinventory.api.service.ItemUnitService;
 import org.openmrs.ui.framework.UiUtils;
 import org.openmrs.ui.framework.annotation.FragmentParam;
 import org.openmrs.ui.framework.fragment.FragmentModel;
@@ -38,14 +40,18 @@ public class InventoryDispenseFragmentController {
                            FragmentModel model) {
 
         List<InventoryItem> inventoryItems = new ArrayList<InventoryItem>();
+        List<ItemUnit> itemUnits = new ArrayList<ItemUnit>();
         try {
 
             InventoryService itemService = Context.getService(InventoryService.class);
+            ItemUnitService itemUnitService = Context.getService(ItemUnitService.class);
             inventoryItems = itemService.getAllInventoryItems();
+            itemUnits = itemUnitService.getAllUnits();
         } catch (Exception e) {
             e.printStackTrace();
         }
         model.addAttribute("inventoryItems", inventoryItems);
+        model.addAttribute("itemUnits", itemUnits);
         model.addAttribute("client", patient);
 
         List<String> paymentOptions = new ArrayList<String>();
@@ -63,6 +69,7 @@ public class InventoryDispenseFragmentController {
                        @RequestParam(value = "quantity", required = false) int quantity,
                        @RequestParam(value = "payment-mode", required = false) String paymentMode,
                        @RequestParam(value = "client", required = false) int clientId,
+                       @RequestParam(value = "unit") int unit,
                        @RequestParam(value = "isDelivery", required = false) Boolean isDelivery) {
 
         String[] supplements = request.getParameterValues("item[]");
@@ -72,7 +79,9 @@ public class InventoryDispenseFragmentController {
 
             InventoryService itemService = Context.getService(InventoryService.class);
             InventoryOrderService orderService = Context.getService(InventoryOrderService.class);
+            ItemUnitService itemUnitService = Context.getService(ItemUnitService.class);
             InventoryItem inventoryItem = itemService.getInventoryItem(Integer.valueOf(supplements[0]));
+            ItemUnit itemUnit = itemUnitService.getItemUnit(unit);
 
             ItemOrder order = new ItemOrder();
             order.setAddress(address);
@@ -81,6 +90,7 @@ public class InventoryDispenseFragmentController {
             order.setQuantity(quantity);
             order.setDelivery(isDelivery);
             order.setClient(patient);
+            order.setItemUnit(itemUnit);
             orderService.saveOrder(order);
 
         } catch (Exception e) {

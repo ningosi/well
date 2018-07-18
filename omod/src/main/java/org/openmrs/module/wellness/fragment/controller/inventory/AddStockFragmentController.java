@@ -8,8 +8,10 @@ import org.openmrs.module.kenyaui.form.AbstractWebForm;
 import org.openmrs.module.wellnessinventory.api.model.InventoryItem;
 import org.openmrs.module.wellnessinventory.api.model.ItemStockDetails;
 import org.openmrs.module.wellnessinventory.api.model.ItemType;
+import org.openmrs.module.wellnessinventory.api.model.ItemUnit;
 import org.openmrs.module.wellnessinventory.api.service.InventoryItemTypeService;
 import org.openmrs.module.wellnessinventory.api.service.InventoryService;
+import org.openmrs.module.wellnessinventory.api.service.ItemUnitService;
 import org.openmrs.ui.framework.UiUtils;
 import org.openmrs.ui.framework.fragment.FragmentModel;
 import org.springframework.validation.Errors;
@@ -24,19 +26,18 @@ public class AddStockFragmentController {
 
     public void controller(FragmentModel model) {
         List<ItemType> itemTypes = new ArrayList<ItemType>();
+        List<ItemUnit> itemUnits = new ArrayList<ItemUnit>();
         try {
 
             InventoryItemTypeService itemTypeService = Context.getService(InventoryItemTypeService.class);
+            ItemUnitService itemUnitService = Context.getService(ItemUnitService.class);
             itemTypes = itemTypeService.getAllItemTypes();
-            if (itemTypes != null) {
-                log.error("Not null" + " " + itemTypes.size());
-            } else {
-                log.error("Null");
-            }
+            itemUnits = itemUnitService.getAllUnits();
         } catch (Exception e) {
             e.printStackTrace();
         }
         model.addAttribute("itemTypes", itemTypes);
+        model.addAttribute("itemUnits", itemUnits);
 
     }
 
@@ -46,6 +47,7 @@ public class AddStockFragmentController {
                        @RequestParam(value = "description", required = false) String description,
                        @RequestParam(value = "quantity") int quantity,
                        @RequestParam(value = "type") int type,
+                       @RequestParam(value = "unit") int unit,
                        @RequestParam(value = "expiration", required = false) String expiration) {
         log.error("Posting " + name);
         InventoryItem inventoryItem = new InventoryItem();
@@ -66,8 +68,11 @@ public class AddStockFragmentController {
         try {
             InventoryService inventoryService = Context.getService(InventoryService.class);
             InventoryItemTypeService itemTypeService = Context.getService(InventoryItemTypeService.class);
+            ItemUnitService itemUnitService = Context.getService(ItemUnitService.class);
             ItemType itemType = itemTypeService.getItemType(type);
             inventoryItem.setItemType(itemType);
+            ItemUnit itemUnit = itemUnitService.getItemUnit(unit);
+            inventoryItem.setItemUnit(itemUnit);
 
             inventoryService.saveInventoryItem(inventoryItem);
             inventoryService.saveItemStockDetail(itemStockDetails);
