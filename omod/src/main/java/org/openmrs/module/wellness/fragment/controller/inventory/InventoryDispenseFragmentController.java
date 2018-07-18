@@ -42,16 +42,17 @@ public class InventoryDispenseFragmentController {
 
             InventoryService itemService = Context.getService(InventoryService.class);
             inventoryItems = itemService.getAllInventoryItems();
-            if (inventoryItems != null) {
-                log.error("Not null" + " " + inventoryItems.size());
-            } else {
-                log.error("Null");
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         model.addAttribute("inventoryItems", inventoryItems);
         model.addAttribute("client", patient);
+
+        List<String> paymentOptions = new ArrayList<String>();
+        paymentOptions.add("Cash");
+        paymentOptions.add("MPESA");
+        paymentOptions.add("Visa Card");
+        model.addAttribute("paymentOptions",paymentOptions);
 
 
     }

@@ -54,13 +54,14 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="payment-mode" class="control-label mb-1">Payment Method</label>
-                                        <input id="payment-mode" name="payment-mode" type="text"
-                                               class="form-control cc-number identified visa" data-val="true"
-                                               data-val-required="Please enter the card number"
-                                               data-val-cc-number="Please enter a valid card number">
-                                        <span class="help-block" data-valmsg-for="cc-number"
-                                              data-valmsg-replace="true"></span>
+                                        <label for="payment-mode"
+                                               class=" form-control-label">Payment Method</label>
+
+                                        <select name="payment-mode" id="payment-mode" class="form-control">
+                                            <% paymentOptions.each { %>
+                                            <option value="${it}">${it}</option>
+                                            <% } %>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
