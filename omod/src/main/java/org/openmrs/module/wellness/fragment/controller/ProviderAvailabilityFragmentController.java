@@ -134,7 +134,6 @@ public class ProviderAvailabilityFragmentController {
         }
 
         String events = eventsMapper(appointments, providerColors).toJSONString();
-        log.info(events);
         model.addAttribute("events", events);
 
         List<Provider> providerList = Context.getProviderService().getAllProviders();
