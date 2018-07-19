@@ -53,7 +53,7 @@
                                             <%} else {%>
                                                 <td>Unknown</td>
                                             <%}%>
-                                            <td>${it.itemsNum}</td>
+                                            <td>${it.itemUnits}</td>
                                         </tr>
                                         <% } %>
 

@@ -56,8 +56,8 @@ public class InventoryDispenseFragmentController {
 
         List<String> paymentOptions = new ArrayList<String>();
         paymentOptions.add("Cash");
-        paymentOptions.add("MPESA");
-        paymentOptions.add("Visa Card");
+        paymentOptions.add("Till");
+        paymentOptions.add("PDQ");
         model.addAttribute("paymentOptions",paymentOptions);
 
 

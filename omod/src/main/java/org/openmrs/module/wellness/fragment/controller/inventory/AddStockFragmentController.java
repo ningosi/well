@@ -72,7 +72,7 @@ public class AddStockFragmentController {
             ItemType itemType = itemTypeService.getItemType(type);
             inventoryItem.setItemType(itemType);
             ItemUnit itemUnit = itemUnitService.getItemUnit(unit);
-            inventoryItem.setItemUnit(itemUnit);
+            itemStockDetails.setItemUnit(itemUnit);
 
             inventoryService.saveInventoryItem(inventoryItem);
             inventoryService.saveItemStockDetail(itemStockDetails);
