@@ -40,6 +40,7 @@
                                             <th>Item Code</th>
                                             <th>Items Type</th>
                                             <th>Available Units</th>
+                                            <th>Update Stock</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -54,6 +55,11 @@
                                                 <td>Unknown</td>
                                             <%}%>
                                             <td>${it.itemUnits}</td>
+                                            <td style="text-align: center; vertical-align: top; width: 20%">
+                                                <button type="button" class="ke-compact" onclick="ui.navigate('${ ui.pageLink("wellness", "inventory/editStock", [ itemId: it.id ]) }')">
+                                                    <img width="28" height="28" src="${ ui.resourceLink("wellness", "images/icons/edit.svg") }" />
+                                                </button>
+                                            </td>
                                         </tr>
                                         <% } %>
 

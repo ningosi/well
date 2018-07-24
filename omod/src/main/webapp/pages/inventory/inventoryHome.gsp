@@ -9,8 +9,8 @@
 
     def menuItems = [
             [label: "Dispensation", iconProvider: "wellness", icon: "buttons/notepad.svg", href: ui.pageLink("wellness", "inventory/dispensationHome")],
-            [label: "Stock taking", iconProvider: "wellness", icon: "buttons/notepad.svg", href: ui.pageLink("wellness", "inventory/addStock")],
-            [label: "Inventory list", iconProvider: "wellness", icon: "buttons/list.svg", href: ui.pageLink("wellness", "inventory/inventoryList")],
+            [label: "Add Supplement", iconProvider: "wellness", icon: "buttons/notepad.svg", href: ui.pageLink("wellness", "inventory/addStock")],
+            [label: "Inventory stock", iconProvider: "wellness", icon: "buttons/list.svg", href: ui.pageLink("wellness", "inventory/inventoryList")],
             [label: "All Orders ", iconProvider: "wellness", icon: "buttons/orders.svg", href: ui.pageLink("wellness", "inventory/ordersList")]
     ]
 %>
