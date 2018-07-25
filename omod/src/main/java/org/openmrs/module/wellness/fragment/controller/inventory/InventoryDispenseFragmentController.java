@@ -5,6 +5,8 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.openmrs.Patient;
 import org.openmrs.PersonAddress;
 import org.openmrs.PersonAttribute;
@@ -15,6 +17,7 @@ import org.openmrs.module.wellness.metadata.CommonMetadata;
 import org.openmrs.module.wellness.wrapper.PatientWrapper;
 import org.openmrs.module.wellnessinventory.api.model.InventoryItem;
 import org.openmrs.module.wellnessinventory.api.model.ItemOrder;
+import org.openmrs.module.wellnessinventory.api.model.ItemStockDetails;
 import org.openmrs.module.wellnessinventory.api.model.ItemUnit;
 import org.openmrs.module.wellnessinventory.api.service.InventoryOrderService;
 import org.openmrs.module.wellnessinventory.api.service.InventoryService;
@@ -30,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class InventoryDispenseFragmentController {
     private Log log = LogFactory.getLog(InventoryDispenseFragmentController.class);
@@ -41,6 +45,7 @@ public class InventoryDispenseFragmentController {
 
         List<InventoryItem> inventoryItems = new ArrayList<InventoryItem>();
         List<ItemUnit> itemUnits = new ArrayList<ItemUnit>();
+        JSONArray itemStock = new JSONArray();
         try {
 
             InventoryService itemService = Context.getService(InventoryService.class);
@@ -50,6 +55,19 @@ public class InventoryDispenseFragmentController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        for (InventoryItem inventoryItem : inventoryItems) {
+            Set<ItemStockDetails> detailsSet = inventoryItem.getDetails();
+            if (detailsSet.iterator().hasNext()) {
+                ItemStockDetails stockDetails = detailsSet.iterator().next();
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", inventoryItem.getId());
+                jsonObject.put("val", stockDetails.getQuantity());
+                itemStock.add(jsonObject);
+            }
+        }
+        model.addAttribute("itemStock", itemStock.toString());
+        log.error("Item stock " + itemStock.toJSONString());
         model.addAttribute("inventoryItems", inventoryItems);
         model.addAttribute("itemUnits", itemUnits);
         model.addAttribute("client", patient);
@@ -58,7 +76,7 @@ public class InventoryDispenseFragmentController {
         paymentOptions.add("Cash");
         paymentOptions.add("Till");
         paymentOptions.add("PDQ");
-        model.addAttribute("paymentOptions",paymentOptions);
+        model.addAttribute("paymentOptions", paymentOptions);
 
 
     }
@@ -72,7 +90,7 @@ public class InventoryDispenseFragmentController {
                        @RequestParam(value = "unit") int unit,
                        @RequestParam(value = "isDelivery", required = false) Boolean isDelivery) {
 
-        String[] supplements = request.getParameterValues("item[]");
+        String supplements = request.getParameter("item");
         log.error("client id" + clientId);
         Patient patient = Context.getPatientService().getPatient(clientId);
         try {
@@ -80,7 +98,7 @@ public class InventoryDispenseFragmentController {
             InventoryService itemService = Context.getService(InventoryService.class);
             InventoryOrderService orderService = Context.getService(InventoryOrderService.class);
             ItemUnitService itemUnitService = Context.getService(ItemUnitService.class);
-            InventoryItem inventoryItem = itemService.getInventoryItem(Integer.valueOf(supplements[0]));
+            InventoryItem inventoryItem = itemService.getInventoryItem(Integer.valueOf(supplements));
             ItemUnit itemUnit = itemUnitService.getItemUnit(unit);
 
             ItemOrder order = new ItemOrder();

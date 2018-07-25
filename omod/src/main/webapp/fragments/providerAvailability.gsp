@@ -47,13 +47,35 @@ table.toggle tr:nth-child(odd) {
                     event.stopPropagation();
                 }
                 else {
+//                    document.getElementById('fromDate').value = startDate.getTime();
+//                    document.getElementById('toDate').value = endDate.getTime();
+//                    document.forms['appointmentBlockCalendarForm'].submit();
+
+                }
+            },
+            dayClick: function (date, jsEvent, view) {
+
+                var startDate = new Date(date);
+                var endDate = new Date(date);
+                var currentDateTime = new Date();
+
+                if (startDate.getTime() < currentDateTime.getTime()) {
+                    var dialogContent = "Partners cannot be scheduled in the past, please try a different day.";
+                    document.getElementById("notifyDialogText").innerHTML = dialogContent;
+                    jQuery('#notifyDialog').dialog('open');
+                    event.stopPropagation();
+                } else {
                     document.getElementById('fromDate').value = startDate.getTime();
                     document.getElementById('toDate').value = endDate.getTime();
                     document.forms['appointmentBlockCalendarForm'].submit();
                     this.fullCalendar('unselect');
                 }
+
             },
             theme: true,
+            eventClick: function (data, event, view) {
+                console.log('selected');
+            },
 
             eventMouseout: function (calEvent, jsEvent, view) {
                 jQuery(this).css('border-color', '');
@@ -69,7 +91,7 @@ table.toggle tr:nth-child(odd) {
                 var start = jQuery.fullCalendar.moment(data.start);
                 var end = jQuery.fullCalendar.moment(data.end);
                 var duration = jQuery.fullCalendar.formatRange(start, end, 'h:mm');
-                tooltip = '<div class="tooltiptopicevent twptooltip" style="width:auto;height:auto;background:#c0c0c0;position:absolute;z-index:10001;padding:10px 10px 10px 10px ;  line-height: 200%;font-size: 20px;">' + 'Client: ' + ': ' + data.client + '</br>' + 'Type : ' + data.type + '</br>' + 'Time: ' + ': ' + duration + '</br>' + 'Phone No. ' + ': ' + data.mobile + '</br>'+ '</div>';
+                tooltip = '<div class="tooltiptopicevent twptooltip" style="width:auto;height:auto;background:#c0c0c0;position:absolute;z-index:10001;padding:10px 10px 10px 10px ;  line-height: 200%;font-size: 20px;">' + 'Client: ' + ': ' + data.client + '</br>' + 'Type : ' + data.type + '</br>' + 'Time: ' + ': ' + duration + '</br>' + 'Phone No. ' + ': ' + data.mobile + '</br>' + '</div>';
 
 
                 jQuery("body").append(tooltip);
@@ -105,13 +127,13 @@ table.toggle tr:nth-child(odd) {
         var new_events = [];
         var selected_partner = jQuery('#partnerSelect').val();
 
-        if(selected_partner == 0){
+        if (selected_partner == 0) {
             new_events = ${ events };
-        }else {
+        } else {
             console.log("not all");
             for (var i = 0; i < events.length; i++) {
                 console.log("iteration " + i);
-                console.log("Parner id " +  events[i].Partner);
+                console.log("Parner id " + events[i].Partner);
                 if (events[i].Partner == selected_partner) {
                     new_events.push(events[i]);
                     console.log("Added " + events[i]);
@@ -196,8 +218,7 @@ table.toggle tr:nth-child(odd) {
     <div class="ke-panel-heading">Appointment scheduling</div>
 
     <div class="ke-page-content">
-        <form method="post" name="appointmentBlockCalendarForm"
-              action="">
+        <form method="post" name="appointmentBlockCalendarForm">
             <fieldset id="propertiesFieldset" style="clear: both">
                 <legend>Choose properties</legend>
                 <table>
@@ -237,15 +258,12 @@ table.toggle tr:nth-child(odd) {
                 </table>
 
             </fieldset>
-        </form>
-
-        <form method="post" name="appointmentBlockCalendarForm">
-
             <input type="hidden" name="fromDate" id="fromDate" value="${fromDate}"/>
             <input type="hidden" name="toDate" id="toDate" value="${toDate}"/>
             <input type="hidden" name="appointmentBlockId" id="appointmentBlockId"/>
             <input type="hidden" name="action" id="action" value="addNewAppointmentBlock"/>
         </form>
+
         <br/>
 
         <div id="actionButton" style="display: none" align="right">

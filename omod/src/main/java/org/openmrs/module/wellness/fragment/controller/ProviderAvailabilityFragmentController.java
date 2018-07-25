@@ -213,7 +213,11 @@ public class ProviderAvailabilityFragmentController {
             cal.setTimeInMillis(fromDate);
         }
         Date fromDateAsDate = cal.getTime();
-        cal.setTimeInMillis(toDate);
+        if(toDate != null) {
+            cal.setTimeInMillis(toDate);
+        }else{
+            cal.setTimeInMillis(new Date().getTime());
+        }
         Date toDateAsDate = cal.getTime();
 
         //tie in the values to the model

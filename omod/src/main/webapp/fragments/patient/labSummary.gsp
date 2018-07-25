@@ -25,11 +25,13 @@ table.toggle  tr:nth-child(odd) {
             <tr>
                 <th colspan="2">Biochemistry on: ${ biochemistryMap.encounterDatetime }
             </tr>
-            <% bioObs.each { name, value -> %>
-                <tr>
-                    <td>${name}</td>
-                    <td>${value}</td>
-                </tr>
+            <% if (bioObs) { %>
+                <% bioObs.each { name, value -> %>
+                    <tr>
+                        <td>${name}</td>
+                        <td>${value}</td>
+                    </tr>
+                <%}%>
             <%}%>
 
         </table>
@@ -42,11 +44,13 @@ table.toggle  tr:nth-child(odd) {
         <tr>
             <th colspan="2">Haematology on: ${ haematologyMap.encounterDatetime }
         </tr>
-        <% haematologyObs.each { name, value -> %>
-            <tr>
-                <td>${name}</td>
-                <td>${value}</td>
-            </tr>
+        <% if (haematologyObs) { %>
+            <% haematologyObs.each { name, value -> %>
+                <tr>
+                    <td>${name}</td>
+                    <td>${value}</td>
+                </tr>
+            <%}%>
         <%}%>
 
     </table>
@@ -58,11 +62,13 @@ table.toggle  tr:nth-child(odd) {
         <tr>
             <th colspan="2">Indocrinology on: ${ indocrinologyMap.encounterDatetime }
         </tr>
-        <% indocrinologyObs.each { name, value -> %>
-            <tr>
-                <td>${name}</td>
-                <td>${value}</td>
-            </tr>
+        <% if (indocrinologyObs) { %>
+            <% indocrinologyObs.each { name, value -> %>
+                <tr>
+                    <td>${name}</td>
+                    <td>${value}</td>
+                </tr>
+            <%}%>
         <%}%>
 
     </table>

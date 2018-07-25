@@ -8,6 +8,7 @@
     ui.includeCss("wellness", "style.css", 26)
     ui.includeCss("wellness", "bootstrap.min.css", 26)
     ui.includeCss("wellness", "chosen.min.css", 26)
+    ui.includeCss("wellness", "custom.css", 25)
 
 %>
 <div class="ke-panel-frame">
@@ -26,16 +27,14 @@
 
                                 <form action="${ui.actionLink("wellness", "inventory/inventoryDispense", "post")}"
                                       method="post"
-                                      novalidate="novalidate">
+                                      name="dispense">
 
                                     <div class="form-group">
                                         <label for="item"
-                                               class=" form-control-label">Supplement</label>
-                                        <select data-placeholder="Supplement to dispense..." multiple
-                                                class="standardSelect" name="item[]" id="item">
-                                            <option value=""></option>
+                                               class=" form-control-label">Supplement to dispense</label>
+                                        <select name="item" id="item" class="form-control" required onchange="updateMaxStock()">
                                             <% inventoryItems.each { %>
-                                            <option value="${it.id}">${it.name}</option>
+                                            <option value="${it.id}" onclick="selectOption()">${it.name}</option>
                                             <% } %>
                                         </select>
                                     </div>
@@ -45,10 +44,8 @@
 
                                         <label for="quantity" class="control-label mb-1">Quantity</label>
                                         <input id="quantity" name="quantity" type="number"
-                                               class="form-control cc-exp" value="" data-val="true"
-                                               data-val-required="Please enter the card expiration"
-                                               data-val-cc-exp="Please enter a valid month and year"
-                                               placeholder="Quantity" autocomplete="cc-exp">
+                                               class="form-control cc-exp"  data-val="true"
+                                               placeholder="Quantity" autocomplete="cc-exp" required min="1" max="10" step="1">
                                         <span class="help-block" data-valmsg-for="cc-exp"
                                               data-valmsg-replace="true"></span>
                                     </div>
@@ -57,7 +54,7 @@
                                         <label for="unit"
                                                class=" form-control-label">Unit</label>
 
-                                        <select name="unit" id="unit" class="form-control">
+                                        <select name="unit" id="unit" class="form-control" required>
                                             <% itemUnits.each { %>
                                             <option value="${it.unit_id}">${it.name}</option>
                                             <% } %>
@@ -68,7 +65,7 @@
                                         <label for="payment-mode"
                                                class=" form-control-label">Payment Method</label>
 
-                                        <select name="payment-mode" id="payment-mode" class="form-control">
+                                        <select name="payment-mode" id="payment-mode" class="form-control" required>
                                             <% paymentOptions.each { %>
                                             <option value="${it}">${it}</option>
                                             <% } %>
@@ -83,7 +80,7 @@
                                                 <div class="radio">
                                                     <label for="radio1" class="form-check-label ">
                                                         <input type="radio" id="radio1" name="isDelivery" value="false"
-                                                               checked class="form-check-input">Walk In
+                                                               checked class="form-check-input" >Walk In
                                                     </label>
                                                 </div>
 
@@ -100,7 +97,7 @@
                                     <div class="form-group">
                                         <label for="address" class="control-label mb-1">Delivery Address</label>
                                         <input id="address" name="address" type="text" class="form-control"
-                                               aria-required="true" aria-invalid="false">
+                                               aria-required="true" required>
                                     </div>
 
                                     <div>
@@ -133,3 +130,19 @@
         });
     });
 </script>
+<script>
+    function updateMaxStock() {
+        var stock = ${itemStock};
+        var e = document.getElementById("item");
+        for (var i = 0; i < stock.length; i++) {
+            var stockItem = stock[i];
+            if(stockItem.id === e.selectedIndex){
+                document.getElementById("quantity").setAttribute("max",stock[i].val)
+            }
+
+        }
+
+    }
+</script>
+
+

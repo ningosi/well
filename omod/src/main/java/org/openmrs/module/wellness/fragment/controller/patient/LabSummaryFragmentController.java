@@ -50,37 +50,38 @@ public class LabSummaryFragmentController {
         model.addAttribute("haematologyMap", haematologyEncounter);
         model.addAttribute("indocrinologyMap", indocrinologyEncounter);
 
-
+        Map<String, String> bioActualData = new HashMap<String, String>();
         if(biochemistryEncounter != null && biochemistryEncounter.getObs().size() > 0) {
-
             Set<Obs> bioObs = biochemistryEncounter.getObs();
-            Map<String, String> bioActualData = new HashMap<String, String>();
             for(Obs obs:bioObs){
                 bioActualData.put(translateConceptsToNames(obs.getConcept()), translateObs(obs));
             }
-            model.addAttribute("bioObs", bioActualData);
-        }
 
+        }
+        model.addAttribute("bioObs", bioActualData);
+
+        Map<String, String> haematologyActualData = new HashMap<String, String>();
         if(haematologyEncounter != null && haematologyEncounter.getObs().size() > 0) {
             Set<Obs> haematologyObs = haematologyEncounter.getObs();
 
-            Map<String, String> haematologyActualData = new HashMap<String, String>();
             for(Obs obs:haematologyObs){
                 haematologyActualData.put(translateConceptsToNames(obs.getConcept()), translateObs(obs));
             }
-            model.addAttribute("haematologyObs", haematologyActualData);
         }
+        model.addAttribute("haematologyObs", haematologyActualData);
 
+        Map<String, String> indocrinologyObsActualData = new HashMap<String, String>();
         if(indocrinologyEncounter != null && indocrinologyEncounter.getObs().size() > 0) {
 
             Set<Obs> indocrinologyObs = indocrinologyEncounter.getObs();
-            Map<String, String> indocrinologyObsActualData = new HashMap<String, String>();
+
             for(Obs obs:indocrinologyObs){
                 indocrinologyObsActualData.put(translateConceptsToNames(obs.getConcept()), translateObs(obs));
             }
 
-            model.addAttribute("indocrinologyObs", indocrinologyObsActualData);
+
         }
+        model.addAttribute("indocrinologyObs", indocrinologyObsActualData);
     }
 
 

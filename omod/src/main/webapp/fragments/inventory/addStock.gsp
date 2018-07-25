@@ -8,6 +8,7 @@
     ui.includeCss("wellness", "style.css", 26)
     ui.includeCss("wellness", "bootstrap.min.css", 26)
     ui.includeCss("wellness", "chosen.min.css", 26)
+    ui.includeCss("wellness", "custom.css", 25)
 
 %>
 <style>
@@ -34,19 +35,18 @@
                                 </div>
                                 <hr>
 
-                                <form action="${ui.actionLink("wellness", "inventory/addStock", "post")}" method="post"
-                                      novalidate="novalidate">
+                                <form name="addStock" method="post"
+                                      action="${ui.actionLink("wellness", "inventory/addStock", "post")}">
                                     <div class="form-group">
                                         <label for="name" class="control-label mb-1">Item Name</label>
                                         <input id="name" name="name" type="text" class="form-control"
                                                aria-required="true" aria-invalid="false" required>
                                     </div>
 
-                                    <div class="form-group has-success">
-                                        <label for="code" class="control-label mb-1">Item code</label>
+                                    <div class="form-group ">
+                                        <label for="code" class="control-label mb-1 is-invalid">Item code</label>
                                         <input id="code" name="code" type="text"
-                                               class="form-control cc-name valid" data-val="true"
-                                               data-val-required="Please enter the name on card"
+                                               class="form-control" data-val="true"
                                                aria-required="true" required>
                                     </div>
 
@@ -86,6 +86,7 @@
                                                       data-valmsg-replace="true"></span>
                                             </div>
                                         </div>
+
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="unit" class="control-label mb-1">Unit</label>

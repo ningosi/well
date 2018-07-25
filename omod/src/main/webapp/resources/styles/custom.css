@@ -12,3 +12,10 @@
     padding-bottom: 20px;
     padding-top: 20px;
 }
+.invalid-input{
+    border-color: #dc3545
+}
+/*input:invalid {*/
+    /*box-shadow: 0 0 5px 1px red;*/
+/*}*/
+

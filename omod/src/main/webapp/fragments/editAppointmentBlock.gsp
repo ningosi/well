@@ -135,6 +135,8 @@
         });
     }
     function endDate() {
+        var start = document.getElementById('fromDate').value;
+        console.log('start');
         jQuery("#endDate").datepicker({
             dateFormat: 'dd/mm/yy',
             gotoCurrent: true,
