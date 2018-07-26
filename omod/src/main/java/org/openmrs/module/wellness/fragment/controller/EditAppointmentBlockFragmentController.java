@@ -71,20 +71,20 @@ public class EditAppointmentBlockFragmentController {
                     block.setCreator(Context.getAuthenticatedUser());
                     service.saveAppointmentBlock(block);
 
-                    //save time slots
-                    TimeSlot timeSlot= new TimeSlot();
-                    timeSlot.setAppointmentBlock(block);
-                    timeSlot.setStartDate(block.getStartDate());
-                    timeSlot.setEndDate(block.getEndDate());
-                    service.saveTimeSlot(timeSlot);
+//                    //save time slots
+//                    TimeSlot timeSlot= new TimeSlot();
+//                    timeSlot.setAppointmentBlock(block);
+//                    timeSlot.setStartDate(block.getStartDate());
+//                    timeSlot.setEndDate(block.getEndDate());
+//                    //service.saveTimeSlot(timeSlot);
 
                     httpSession.setAttribute(WebConstants.OPENMRS_MSG_ATTR, "Provider scheduled changed !");
                 }
                 if(action.equals("delete")){
-                    List<TimeSlot> currentTimeSlots = service.getTimeSlotsInAppointmentBlock(block);
-                    for(TimeSlot slot: currentTimeSlots){
-                        service.purgeTimeSlot(slot);
-                    }
+//                    List<TimeSlot> currentTimeSlots = service.getTimeSlotsInAppointmentBlock(block);
+//                    for(TimeSlot slot: currentTimeSlots){
+//                        service.purgeTimeSlot(slot);
+//                    }
 
                     service.purgeAppointmentBlock(block);
                     httpSession.setAttribute(WebConstants.OPENMRS_MSG_ATTR, "Schedule deleted");

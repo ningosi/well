@@ -50,7 +50,7 @@ import java.util.Map;
 /**
  * Viewing a patient's record, in the chart app
  */
-@AppPage(EmrConstants.APP_CHART)
+@AppPage(EmrConstants.APP_REGISTRATION)
 public class ChartViewPatientPageController {
 
 	public void controller(@RequestParam(required = false, value = "visitId") Visit visit,
