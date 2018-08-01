@@ -32,7 +32,7 @@
                         <td>
                             <span class="ke-field-content">
                                 <label class="ke-field-label">Start date</label>
-                                <input type="text" id="startDate" name="startDate" value="${fromDate}" onclick="startDate() "/>
+                                <input type="text" id="startDate" name="startDate" value="${fromDate}" onclick="startDate()"/>
                                 <img
                                         src="${ui.resourceLink("wellness", "images/buttons/calendarIcon.png")}"
                                         class="calendarIcon" alt=""
@@ -135,8 +135,6 @@
         });
     }
     function endDate() {
-        var start = document.getElementById('fromDate').value;
-        console.log('start');
         jQuery("#endDate").datepicker({
             dateFormat: 'dd/mm/yy',
             gotoCurrent: true,

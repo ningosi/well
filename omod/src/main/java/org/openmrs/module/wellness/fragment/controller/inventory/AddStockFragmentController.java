@@ -5,6 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openmrs.User;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.kenyaui.form.AbstractWebForm;
+import org.openmrs.module.wellness.EmrConstants;
 import org.openmrs.module.wellnessinventory.api.model.InventoryItem;
 import org.openmrs.module.wellnessinventory.api.model.ItemStockDetails;
 import org.openmrs.module.wellnessinventory.api.model.ItemType;
@@ -41,7 +42,7 @@ public class AddStockFragmentController {
 
     }
 
-    public String post(FragmentModel model, UiUtils ui,
+    public void post(FragmentModel model, UiUtils ui,
                        @RequestParam(value = "name") String name,
                        @RequestParam(value = "code", required = false) String code,
                        @RequestParam(value = "description", required = false) String description,
@@ -80,7 +81,7 @@ public class AddStockFragmentController {
             e.printStackTrace();
         }
 
-        return null;
+//        return "redirect:" + ui.pageLink(EmrConstants.MODULE_ID, "inventory/inventoryList" );
     }
 
     public class AddStockForm extends AbstractWebForm {

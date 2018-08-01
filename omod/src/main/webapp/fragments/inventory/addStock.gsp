@@ -35,8 +35,7 @@
                                 </div>
                                 <hr>
 
-                                <form name="addStock" method="post"
-                                      action="${ui.actionLink("wellness", "inventory/addStock", "post")}">
+                                <form name="addStock" id="addStock" method="post" action="${ui.actionLink("wellness", "inventory/addStock", "post")}">
                                     <div class="form-group">
                                         <label for="name" class="control-label mb-1">Item Name</label>
                                         <input id="name" name="name" type="text" class="form-control"
@@ -122,3 +121,15 @@
 <%
     ui.includeJavascript("wellness", "chosen.jquery.min.js")
 %>
+<script type="text/javascript">
+    jQuery(function () {
+
+        kenyaui.setupAjaxPost('addStock', {
+            onSuccess: function () {
+                ui.navigate('wellness', 'inventory/inventoryList');
+            }
+
+        });
+
+    });
+</script>

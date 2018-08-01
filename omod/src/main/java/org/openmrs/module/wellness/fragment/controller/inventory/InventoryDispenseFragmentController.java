@@ -55,8 +55,9 @@ public class InventoryDispenseFragmentController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        String initial = "1";
         for (InventoryItem inventoryItem : inventoryItems) {
+
             Set<ItemStockDetails> detailsSet = inventoryItem.getDetails();
             if (detailsSet.iterator().hasNext()) {
                 ItemStockDetails stockDetails = detailsSet.iterator().next();
@@ -64,13 +65,16 @@ public class InventoryDispenseFragmentController {
                 jsonObject.put("id", inventoryItem.getId());
                 jsonObject.put("val", stockDetails.getQuantity());
                 itemStock.add(jsonObject);
+                if(inventoryItems.indexOf(inventoryItem) == 0){
+                    initial = String.valueOf(stockDetails.getQuantity());
+                }
             }
         }
         model.addAttribute("itemStock", itemStock.toString());
-        log.error("Item stock " + itemStock.toJSONString());
         model.addAttribute("inventoryItems", inventoryItems);
         model.addAttribute("itemUnits", itemUnits);
         model.addAttribute("client", patient);
+        model.addAttribute("initialMax", initial);
 
         List<String> paymentOptions = new ArrayList<String>();
         paymentOptions.add("Cash");

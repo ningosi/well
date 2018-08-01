@@ -13,4 +13,6 @@
 <div class="ke-page-content">
     ${ui.includeFragment("wellness", "inventory/clientProfile", [patient: currentPatient])}
     ${ui.includeFragment("wellness", "inventory/inventoryDispense", [patient: currentPatient])}
+    ${ui.includeFragment("wellness", "inventory/clientOrders", [patient: currentPatient])}
+
 </div>

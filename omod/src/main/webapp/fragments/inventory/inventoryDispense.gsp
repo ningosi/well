@@ -45,7 +45,7 @@
                                         <label for="quantity" class="control-label mb-1">Quantity</label>
                                         <input id="quantity" name="quantity" type="number"
                                                class="form-control cc-exp"  data-val="true"
-                                               placeholder="Quantity" autocomplete="cc-exp" required min="1" max="10" step="1">
+                                               placeholder="Quantity" autocomplete="cc-exp" required min="1" max="${initialMax}" step="1">
                                         <span class="help-block" data-valmsg-for="cc-exp"
                                               data-valmsg-replace="true"></span>
                                     </div>
@@ -56,7 +56,7 @@
 
                                         <select name="unit" id="unit" class="form-control" required>
                                             <% itemUnits.each { %>
-                                            <option value="${it.unit_id}">${it.name}</option>
+                                            <option value="${it.unit_id}">${it.name} ${it.unit_id}</option>
                                             <% } %>
                                         </select>
                                     </div>
