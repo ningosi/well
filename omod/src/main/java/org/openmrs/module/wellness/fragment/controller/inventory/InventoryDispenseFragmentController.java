@@ -70,6 +70,10 @@ public class InventoryDispenseFragmentController {
                 }
             }
         }
+        for(ItemUnit itemUnit : itemUnits){
+            log.error("Item unit" + itemUnit.getId());
+        }
+        log.error("item stock " + itemStock.toString());
         model.addAttribute("itemStock", itemStock.toString());
         model.addAttribute("inventoryItems", inventoryItems);
         model.addAttribute("itemUnits", itemUnits);

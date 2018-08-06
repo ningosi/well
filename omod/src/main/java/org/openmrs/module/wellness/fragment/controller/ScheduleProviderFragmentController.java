@@ -77,11 +77,11 @@ public class ScheduleProviderFragmentController {
                 appointmentService.saveAppointmentBlock(appointmentBlock);
 
                 //save time slots
-                TimeSlot timeSlot= new TimeSlot();
-                timeSlot.setAppointmentBlock(appointmentBlock);
-                timeSlot.setStartDate(appointmentBlock.getStartDate());
-                timeSlot.setEndDate(appointmentBlock.getEndDate());
-                appointmentService.saveTimeSlot(timeSlot);
+//                TimeSlot timeSlot= new TimeSlot();
+//                timeSlot.setAppointmentBlock(appointmentBlock);
+//                timeSlot.setStartDate(appointmentBlock.getStartDate());
+//                timeSlot.setEndDate(appointmentBlock.getEndDate());
+//                appointmentService.saveTimeSlot(timeSlot);
 
                 httpSession.setAttribute(WebConstants.OPENMRS_MSG_ATTR, "Provider scheduled !");
 

@@ -13,8 +13,10 @@ import org.openmrs.module.metadatadeploy.MetadataUtils;
 import org.openmrs.module.wellness.metadata.CommonMetadata;
 import org.openmrs.module.wellness.wrapper.PatientWrapper;
 import org.openmrs.module.wellnessinventory.api.model.InventoryItem;
+import org.openmrs.module.wellnessinventory.api.model.ItemOrder;
 import org.openmrs.module.wellnessinventory.api.model.ItemType;
 import org.openmrs.module.wellnessinventory.api.service.InventoryItemTypeService;
+import org.openmrs.module.wellnessinventory.api.service.InventoryOrderService;
 import org.openmrs.module.wellnessinventory.api.service.InventoryService;
 import org.openmrs.ui.framework.UiUtils;
 import org.openmrs.ui.framework.annotation.FragmentParam;
@@ -86,10 +88,13 @@ public class ClientProfileFragmentController {
         model.addAttribute("partner", providerName);
 
         List<InventoryItem> inventoryItems = new ArrayList<InventoryItem>();
+        List<ItemOrder> clientOrders = new ArrayList<ItemOrder>();
         try {
 
             InventoryService itemService = Context.getService(InventoryService.class);
             inventoryItems = itemService.getAllInventoryItems();
+            InventoryOrderService orderService = Context.getService(InventoryOrderService.class);
+            clientOrders = orderService.getClientOrders(patient);
             if (inventoryItems != null) {
                 log.error("Not null" + " " + inventoryItems.size());
             } else {
@@ -99,6 +104,7 @@ public class ClientProfileFragmentController {
             e.printStackTrace();
         }
         model.addAttribute("inventoryItems", inventoryItems);
+        model.addAttribute("clientOrders", clientOrders);
 
         String url = "/openmrs/ms/uiframework/resource/wellness/images/logos/passport.png";
         if(patient.getGender().equals("F")){

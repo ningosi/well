@@ -11,6 +11,26 @@
     ui.includeCss("wellness", "custom.css", 25)
 
 %>
+<script>
+    function updateMaxStock() {
+        console.log('clicked');
+        var stock = ${itemStock};
+        console.log(stock);
+        var chosen = document.getElementById("item");
+        console.log('passed');
+        for (var i = 0; i < stock.length; i++) {
+            var stockItem = stock[i];
+            console.log('selected index ' + chosen.selectedIndex);
+            if(i+1 === chosen.selectedIndex){
+                console.log('clicked', stock);
+                console.log('setting ' + stock[i].val);
+                document.getElementById("quantity").setAttribute("max",stock[i].val)
+            }
+
+        }
+
+    }
+</script>
 <div class="ke-panel-frame">
     <div class="ke-panel-heading">Dispense</div>
 
@@ -32,9 +52,10 @@
                                     <div class="form-group">
                                         <label for="item"
                                                class=" form-control-label">Supplement to dispense</label>
-                                        <select name="item" id="item" class="form-control" required onchange="updateMaxStock()">
+                                        <select name="item" id="item" class="form-control"  onchange="updateMaxStock()" required>
+                                            <option value="" disabled selected>Please select a product</option>
                                             <% inventoryItems.each { %>
-                                            <option value="${it.id}" onclick="selectOption()">${it.name}</option>
+                                            <option value="${it.id}">${it.name}</option>
                                             <% } %>
                                         </select>
                                     </div>
@@ -45,9 +66,7 @@
                                         <label for="quantity" class="control-label mb-1">Quantity</label>
                                         <input id="quantity" name="quantity" type="number"
                                                class="form-control cc-exp"  data-val="true"
-                                               placeholder="Quantity" autocomplete="cc-exp" required min="1" max="${initialMax}" step="1">
-                                        <span class="help-block" data-valmsg-for="cc-exp"
-                                              data-valmsg-replace="true"></span>
+                                               placeholder="Quantity" required min="1" max="${initialMax}" step="1">
                                     </div>
 
                                     <div class="form-group">
@@ -55,8 +74,11 @@
                                                class=" form-control-label">Unit</label>
 
                                         <select name="unit" id="unit" class="form-control" required>
+                                            <option value="" disabled selected>Please select</option>
                                             <% itemUnits.each { %>
-                                            <option value="${it.unit_id}">${it.name} ${it.unit_id}</option>
+                                            <% if(it.id) { %>
+                                            <option value="${it.id}">${it.name}</option>
+                                            <% } %>
                                             <% } %>
                                         </select>
                                     </div>
@@ -66,6 +88,7 @@
                                                class=" form-control-label">Payment Method</label>
 
                                         <select name="payment-mode" id="payment-mode" class="form-control" required>
+                                            <option value="" disabled selected>Select a payment method</option>
                                             <% paymentOptions.each { %>
                                             <option value="${it}">${it}</option>
                                             <% } %>
@@ -97,7 +120,7 @@
                                     <div class="form-group">
                                         <label for="address" class="control-label mb-1">Delivery Address</label>
                                         <input id="address" name="address" type="text" class="form-control"
-                                               aria-required="true" required>
+                                               aria-required="true">
                                     </div>
 
                                     <div>
@@ -130,19 +153,6 @@
         });
     });
 </script>
-<script>
-    function updateMaxStock() {
-        var stock = ${itemStock};
-        var e = document.getElementById("item");
-        for (var i = 0; i < stock.length; i++) {
-            var stockItem = stock[i];
-            if(stockItem.id === e.selectedIndex){
-                document.getElementById("quantity").setAttribute("max",stock[i].val)
-            }
 
-        }
-
-    }
-</script>
 
 
