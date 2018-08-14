@@ -24,7 +24,7 @@ import java.util.Date;
 
 @Component
 @Builds({"wellness.common.report.allPatients"})
-public class AllClientsReportBuilder extends CalculationReportBuilder {
+public class AllInventoryClientsReportBuilder extends CalculationReportBuilder {
     @Override
     protected void addColumns(CohortReportDescriptor report, PatientDataSetDefinition dsd) {
         PatientIdentifierType mobileNumber = MetadataUtils.existing(PatientIdentifierType.class, CommonMetadata._PatientIdentifierType.MOBILE_NUMBER);

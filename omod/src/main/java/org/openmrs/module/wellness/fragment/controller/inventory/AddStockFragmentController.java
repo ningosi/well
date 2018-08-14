@@ -43,13 +43,14 @@ public class AddStockFragmentController {
     }
 
     public void post(FragmentModel model, UiUtils ui,
-                       @RequestParam(value = "name") String name,
-                       @RequestParam(value = "code", required = false) String code,
-                       @RequestParam(value = "description", required = false) String description,
-                       @RequestParam(value = "quantity") int quantity,
-                       @RequestParam(value = "type") int type,
-                       @RequestParam(value = "unit") int unit,
-                       @RequestParam(value = "expiration", required = false) String expiration) {
+                     @RequestParam(value = "name") String name,
+                     @RequestParam(value = "code", required = false) String code,
+                     @RequestParam(value = "description", required = false) String description,
+                     @RequestParam(value = "quantity") int quantity,
+                     @RequestParam(value = "type") int type,
+                     @RequestParam(value = "unit") int unit,
+                     @RequestParam(value = "expiration", required = false) String expiration,
+                     @RequestParam(value = "minStock", required = false) String minStock) {
         log.error("Posting " + name);
         InventoryItem inventoryItem = new InventoryItem();
         User user = Context.getAuthenticatedUser();
@@ -59,11 +60,14 @@ public class AddStockFragmentController {
         inventoryItem.setUuid(String.valueOf(UUID.randomUUID()));
 
         ItemStockDetails itemStockDetails = new ItemStockDetails();
-        String stockName = String.format("Stock_%s",name);
+        String stockName = String.format("Stock_%s", name);
         itemStockDetails.setName(stockName);
         itemStockDetails.setQuantity(quantity);
         itemStockDetails.setUuid(String.valueOf(UUID.randomUUID()));
         itemStockDetails.setInventoryItem(inventoryItem);
+        if(minStock != null) {
+            itemStockDetails.setMinStock(Integer.parseInt(minStock));
+        }
 
 
         try {

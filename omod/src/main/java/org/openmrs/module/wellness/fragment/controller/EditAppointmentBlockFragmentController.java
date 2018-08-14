@@ -1,5 +1,7 @@
 package org.openmrs.module.wellness.fragment.controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.appointmentscheduling.AppointmentBlock;
 import org.openmrs.module.appointmentscheduling.AppointmentType;
@@ -21,6 +23,7 @@ import java.util.Set;
 
 public class EditAppointmentBlockFragmentController {
 
+    private Log log = LogFactory.getLog(EditAppointmentBlockFragmentController.class);
     public void controller(FragmentModel model,
                            PageModel sharedModel){
 
@@ -34,6 +37,8 @@ public class EditAppointmentBlockFragmentController {
         model.addAttribute("fromDate", EmrUtils.formatDates(block.getStartDate()));
         model.addAttribute("toDate", EmrUtils.formatDates(block.getEndDate()));
         model.addAttribute("blockId", blockId);
+        log.error("From date " +  EmrUtils.formatDates(block.getStartDate()));
+        log.error("End date " +  EmrUtils.formatDates(block.getEndDate()));
 
     }
 

@@ -23,6 +23,7 @@
 		<property name="reports">
 			<set>
 				<ref bean="wellness.common.report.allPatients" />
+                <ref bean="wellness.common.report.allInventoryClients"/>
 				<ref bean="wellness.nutrition.report.lostToFollowUp" />
 				<ref bean="wellness.common.report.missedAppointment" />
 				<ref bean="wellness.nutrition.report.onNutritionProgram" />

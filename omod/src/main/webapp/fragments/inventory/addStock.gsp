@@ -35,7 +35,8 @@
                                 </div>
                                 <hr>
 
-                                <form name="addStock" id="addStock" method="post" action="${ui.actionLink("wellness", "inventory/addStock", "post")}">
+                                <form name="addStock" id="addStock" method="post"
+                                      action="${ui.actionLink("wellness", "inventory/addStock", "post")}">
                                     <div class="form-group">
                                         <label for="name" class="control-label mb-1">Item Name</label>
                                         <input id="name" name="name" type="text" class="form-control"
@@ -98,6 +99,17 @@
                                                       data-valmsg-replace="true"></span>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="minStock" class="control-label mb-1">Minimum stock</label>
+                                        <input id="minStock" name="minStock" type="text"
+                                               class="form-control cc-number identified visa" data-val="true"
+                                               data-val-required="Please enter the card number"
+                                               placeholder="Min stock"
+                                               data-val-cc-number="Please enter a valid card number" required>
+                                        <span class="help-block" data-valmsg-for="cc-number"
+                                              data-valmsg-replace="true"></span>
                                     </div>
 
                                     <div>

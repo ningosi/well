@@ -58,7 +58,8 @@ public class EditStockFragmentController {
                        @RequestParam(value = "quantity") int quantity,
                        @RequestParam(value = "type", required = false) int type,
                        @RequestParam(value = "unit", required = false) int unit,
-                       @RequestParam(value = "expiration", required = false) String expiration) {
+                       @RequestParam(value = "expiration", required = false) String expiration,
+                       @RequestParam(value = "minStock", required = false) String minStock) {
 
         try {
             InventoryService inventoryService = Context.getService(InventoryService.class);
@@ -68,6 +69,9 @@ public class EditStockFragmentController {
                 ItemStockDetails stockDetails = iterator.next();
                 int newQuantity = stockDetails.getQuantity() + quantity;
                 stockDetails.setQuantity(newQuantity);
+                if(minStock != null) {
+                    stockDetails.setMinStock(Integer.parseInt(minStock));
+                }
                 inventoryService.saveItemStockDetail(stockDetails);
             }
         } catch (Exception e) {
