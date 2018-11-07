@@ -15,6 +15,7 @@ import org.openmrs.api.context.Context;
 import org.openmrs.module.metadatadeploy.MetadataUtils;
 import org.openmrs.module.wellness.metadata.CommonMetadata;
 import org.openmrs.module.wellness.wrapper.PatientWrapper;
+import org.openmrs.module.wellness.wrapper.PersonWrapper;
 import org.openmrs.module.wellnessinventory.api.model.InventoryItem;
 import org.openmrs.module.wellnessinventory.api.model.ItemOrder;
 import org.openmrs.module.wellnessinventory.api.model.ItemStockDetails;
@@ -79,6 +80,15 @@ public class InventoryDispenseFragmentController {
         model.addAttribute("itemUnits", itemUnits);
         model.addAttribute("client", patient);
         model.addAttribute("initialMax", initial);
+
+        Set<PersonAddress> personAddresses = patient.getAddresses();
+        String delivery_addreess = null;
+        if(personAddresses.iterator().hasNext()){
+            PersonAddress personAddress = personAddresses.iterator().next();
+            delivery_addreess = personAddress.getAddress2();
+        }
+        model.addAttribute("delivery_addreess", delivery_addreess);
+
 
         List<String> paymentOptions = new ArrayList<String>();
         paymentOptions.add("Cash");

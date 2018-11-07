@@ -233,7 +233,11 @@
                                             <td>
                                                 <select class="provider" name="provider" id="provider">
                                                     <% providerList.each { %>
-                                                    <option value="${it.providerId}">${it.name}</option>
+                                                        <% if (provider_id && provider_id == it.providerId) { %>
+                                                            <option value="${it.providerId}" selected>${it.name}</option>
+                                                        <% } else { %>
+                                                            <option value="${it.providerId}">${it.name}</option>
+                                                        <% } %>
                                                     <% } %>
                                                 </select>
                                             </td>

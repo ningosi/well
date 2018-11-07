@@ -65,6 +65,14 @@ public class EditPatientFragmentController {
             throw new RuntimeException("A patient or person can be provided, but not both");
         }
 
+        User user = Context.getAuthenticatedUser();
+        Collection<Provider> providers = Context.getProviderService().getProvidersByPerson(user.getPerson());
+        Integer provider_id = null;
+        if(!user.isSuperUser() && providers.iterator().hasNext()){
+            provider_id = providers.iterator().next().getProviderId();
+        }
+        model.addAttribute("provider_id", provider_id);
+
         Person existing = patient != null ? patient : person;
 
         model.addAttribute("command", newEditPatientForm(existing));
