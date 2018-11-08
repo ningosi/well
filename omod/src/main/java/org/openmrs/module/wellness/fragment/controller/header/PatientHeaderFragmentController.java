@@ -15,6 +15,7 @@
 package org.openmrs.module.wellness.fragment.controller.header;
 
 import org.openmrs.Patient;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.appframework.domain.AppDescriptor;
 import org.openmrs.module.kenyaui.KenyaUiUtils;
 import org.openmrs.ui.framework.WebConstants;
@@ -34,7 +35,8 @@ public class PatientHeaderFragmentController {
 						   @SpringBean KenyaUiUtils kenyaUi) {
 
 		model.addAttribute("patient", patient);
-		
+		//Encounter code
+
 		AppDescriptor currentApp = kenyaUi.getCurrentApp(pageRequest);
 
 		if (currentApp != null) {
