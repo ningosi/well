@@ -19,7 +19,10 @@
 		<span class="ke-patient-name">{{ patient.name }}</span><br/>
 		<span class="ke-patient-gender">{{ patient.gender | keGender }}</span>,
 		<span class="ke-patient-age">{{ patient.age }} <small>(${ kenyaui.formatPersonBirthdate(patient) })</small></span>
-	</div>
+        <br>
+        <span ng-if="patient.activeVisit" class="ke-visittag">Period in Program :  <strong>${ dateEnrolled } </strong> Days</span>
+
+    </div>
 	
 	<div style="float: left; width: 30%; text-align: center">
 		<div ng-repeat="identifier in patient.identifiers">
