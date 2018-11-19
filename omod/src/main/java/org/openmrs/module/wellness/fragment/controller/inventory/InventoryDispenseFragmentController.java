@@ -81,11 +81,13 @@ public class InventoryDispenseFragmentController {
         model.addAttribute("client", patient);
         model.addAttribute("initialMax", initial);
 
-        Set<PersonAddress> personAddresses = patient.getAddresses();
         String delivery_addreess = null;
-        if(personAddresses.iterator().hasNext()){
-            PersonAddress personAddress = personAddresses.iterator().next();
-            delivery_addreess = personAddress.getAddress2();
+        if (patient.getAddresses().size() > 0) {
+            for (PersonAddress address : patient.getAddresses()) {
+                if (address.getAddress2() != null) {
+                    delivery_addreess = address.getAddress2();
+                }
+            }
         }
         model.addAttribute("delivery_addreess", delivery_addreess);
 

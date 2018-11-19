@@ -120,7 +120,7 @@
                                     <div class="form-group">
                                         <label for="address" class="control-label mb-1">Delivery Address</label>
                                         <input id="address" name="address" type="text" class="form-control"
-                                               aria-required="true" ${delivery_addreess ? 'value="' + command.delivery_addreess + '"' : ''}>
+                                               aria-required="true" ${delivery_addreess ? 'value="' + delivery_addreess + '"' : ''}>
                                     </div>
 
                                     <div>
