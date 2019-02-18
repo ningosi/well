@@ -1,21 +1,12 @@
 package org.openmrs.module.wellness.fragment.controller.inventory;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.openmrs.Patient;
 import org.openmrs.PersonAddress;
-import org.openmrs.PersonAttribute;
-import org.openmrs.PersonAttributeType;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.metadatadeploy.MetadataUtils;
-import org.openmrs.module.wellness.metadata.CommonMetadata;
-import org.openmrs.module.wellness.wrapper.PatientWrapper;
-import org.openmrs.module.wellness.wrapper.PersonWrapper;
 import org.openmrs.module.wellnessinventory.api.model.InventoryItem;
 import org.openmrs.module.wellnessinventory.api.model.ItemOrder;
 import org.openmrs.module.wellnessinventory.api.model.ItemStockDetails;
@@ -27,17 +18,15 @@ import org.openmrs.ui.framework.UiUtils;
 import org.openmrs.ui.framework.annotation.FragmentParam;
 import org.openmrs.ui.framework.fragment.FragmentModel;
 import org.openmrs.ui.framework.page.PageRequest;
-import org.openmrs.util.OpenmrsUtil;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class InventoryDispenseFragmentController {
-    private Log log = LogFactory.getLog(InventoryDispenseFragmentController.class);
+public class CreateOrderFragmentController {
+    private Log log = LogFactory.getLog(CreateOrderFragmentController.class);
 
     public void controller(@FragmentParam("patient") Patient patient,
                            PageRequest pageRequest,

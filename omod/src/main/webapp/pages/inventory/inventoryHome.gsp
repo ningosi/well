@@ -3,7 +3,7 @@
 
     def menuItems = [
             [label: "Add Supplement", iconProvider: "wellness", icon: "buttons/notepad.svg", href: ui.pageLink("wellness", "inventory/addStock")],
-            [label: "Dispensation", iconProvider: "wellness", icon: "buttons/notepad.svg", href: ui.pageLink("wellness", "inventory/dispensationHome")],
+            [label: "Create Order", iconProvider: "wellness", icon: "buttons/notepad.svg", href: ui.pageLink("wellness", "inventory/createOrderHome")],
             [label: "Inventory stock", iconProvider: "wellness", icon: "buttons/list.svg", href: ui.pageLink("wellness", "inventory/inventoryList")],
             [label: "All Orders ", iconProvider: "wellness", icon: "buttons/orders.svg", href: ui.pageLink("wellness", "inventory/ordersList")]
     ]

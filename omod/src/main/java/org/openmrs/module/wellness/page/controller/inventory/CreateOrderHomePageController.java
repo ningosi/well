@@ -23,7 +23,7 @@ import org.openmrs.ui.framework.page.PageModel;
  * Homepage for the inventory app
  */
 @AppPage(EmrConstants.APP_INVENTORY)
-public class DispensationHomePageController {
+public class CreateOrderHomePageController {
 
 	public String controller(UiUtils ui, PageModel model) {
         return null;

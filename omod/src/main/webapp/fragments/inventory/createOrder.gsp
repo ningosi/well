@@ -32,7 +32,7 @@
     }
 </script>
 <div class="ke-panel-frame">
-    <div class="ke-panel-heading">Dispense</div>
+    <div class="ke-panel-heading">Create Order</div>
 
     <div class="ke-panel-content">
         <div class="row">
