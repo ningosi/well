@@ -49,7 +49,7 @@ public class PatientHeaderFragmentController {
                            FragmentModel model,
                            PageRequest pageRequest,
                            @SpringBean KenyaUiUtils kenyaUi,
-                           @SpringBean ProgramManager programManager) throws ParseException {
+                           @SpringBean ProgramManager programManager) {
 
 
         List<ProgramDescriptor> programs = new ArrayList<ProgramDescriptor>();
@@ -89,10 +89,17 @@ public class PatientHeaderFragmentController {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //Date now = dateFormat.parse(new Date().toString());
-        Date enrolledDate = dateFormat.parse(date.toString());
-        long diffInMillies = Math.abs(System.currentTimeMillis() - enrolledDate.getTime());
-        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-        model.addAttribute("dateEnrolled", diff);
+        Date enrolledDate = null;
+        try {
+            enrolledDate = dateFormat.parse(date.toString());
+            long diffInMillies = Math.abs(System.currentTimeMillis() - enrolledDate.getTime());
+            long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+            model.addAttribute("dateEnrolled", diff);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            model.addAttribute("dateEnrolled", 0);
+        }
+
         //Encounter code
 
         AppDescriptor currentApp = kenyaUi.getCurrentApp(pageRequest);

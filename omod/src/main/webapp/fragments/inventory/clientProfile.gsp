@@ -53,7 +53,7 @@
                         <h5 class="text-sm-center mt-2 mb-1 padding-5 text">Town : ${email}</h5>
                         <% } %>
                         <% if (home) { %>
-                        <h5 class="text-sm-center mt-2 mb-1 padding-5 text">Home : ${home}</h5>
+                        <h5 class="text-sm-center mt-2 mb-1 padding-5 text">Delivery Address : ${home}</h5>
                         <% } %>
                         <% if (box) { %>
                         <h5 class="text-sm-center mt-2 mb-1 padding-5 text">Address : ${box}</h5>

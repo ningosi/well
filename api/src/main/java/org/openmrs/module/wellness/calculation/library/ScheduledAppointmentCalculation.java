@@ -68,19 +68,20 @@ public class ScheduledAppointmentCalculation extends AbstractPatientCalculation 
 
         CalculationResultMap ret = new CalculationResultMap();
         for (Integer ptId : cohort) {
-            String status = "";
+            boolean status = false;
             Patient patient = patientService.getPatient(ptId);
             List<Appointment> appointmentList = appointmentService.getAppointmentsOfPatient(patient);
             if (appointmentList.size() > 0) {
                 for (Appointment appointment : appointmentList) {
 
                     if ((appointment.getStartDateTime() != null && appointment.getStartDateTime().after(startOfDay)) && (appointment.getEndDateTime() != null && appointment.getEndDateTime().before(endOfDay))) {
-                        status = appointment.getStatus().getName();
+//                        status = appointment.getStatus().getName();
+                        status = true;
                     }
                 }
             }
 
-            ret.put(ptId, new SimpleResult(status, this));
+            ret.put(ptId, new BooleanResult(status, this));
         }
         return ret;
 

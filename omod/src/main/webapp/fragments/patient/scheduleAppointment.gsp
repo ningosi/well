@@ -77,6 +77,8 @@ table.schedules tr:nth-child(odd) {
                                             <td>Start Time</td>
                                             <td>
                                                 <select name="startHours">
+                                                    <option value="08">06</option>
+                                                    <option value="08">07</option>
                                                     <option value="08">08</option>
                                                     <option value="09">09</option>
                                                     <option value="10">10</option>
@@ -108,6 +110,8 @@ table.schedules tr:nth-child(odd) {
                                             <td>End Time:</td>
                                             <td>
                                                 <select name="endHours">
+                                                    <option value="08">06</option>
+                                                    <option value="08">07</option>
                                                     <option value="08">08</option>
                                                     <option value="09">09</option>
                                                     <option value="10">10</option>
